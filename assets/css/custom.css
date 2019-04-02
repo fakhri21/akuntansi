@@ -1,0 +1,360 @@
+.navbar {
+    padding: 20px;
+}
+
+.navbar-default {
+    background: #2d1d18;
+    border: none;
+    border-radius: 0;
+}
+
+.navbar-default .navbar-brand {
+    padding: 0px;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #ecdbff;
+}
+
+.navbar-default .navbar-text {
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #eee;
+}
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: #ecdbff;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+    color: #fff;
+    background-color: rgba(255,255,255,.3);
+    border-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: rgba(255,255,255,.3);
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ecf0f1;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+    border-color: #ecf0f1;
+}
+
+.navbar-default .navbar-link {
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-link:hover {
+    color: #ecdbff;
+}
+
+.navbar-nav .open .dropdown-menu{background: #ffab91;}
+.dropdown-menu li a {color: #fff;}
+
+@media (max-width: 767px) {
+    .navbar-nav .open .dropdown-menu{background: transparent}
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: #ecf0f1;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+        color: #ecdbff;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>.active>a,
+    .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
+        color: #ecdbff;
+        background-color: transparent;
+    }
+}
+
+
+/* bagian hero */
+
+body {
+    padding-top: 90px;
+}
+
+
+/* buttons */
+.btn-custom{
+    background: #1C1D18;
+    border: 1px solid #bbb;
+    color: #ddd;
+}
+
+.btn-custom:hover{
+    background: #2c2d26;
+    color: #eee;
+}
+
+
+/* Makes images fully responsive */
+
+.img-responsive,
+.thumbnail>img,
+.thumbnail a>img,
+.carousel-inner>.item>img,
+.carousel-inner>.item>a>img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* ------------------- Carousel Styling ------------------- */
+
+.carousel-inner {
+    border-radius: 15px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    padding: 0 0 10px 25px;
+    color: #fff;
+    text-align: left;
+}
+
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    z-index: 15;
+    margin: 0;
+    padding: 0 25px 25px 0;
+    text-align: right;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none;
+}
+
+
+/* ------------------- Section Styling - Not needed for carousel styling ------------------- */
+
+
+.section-white {
+    padding: 10px 0;
+    background: #fff0a3;
+    color: #555;
+}
+
+
+@media screen and (min-width: 768px) {
+    .section-white {
+        padding: 1.5em 0;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+}
+
+/*  Penawaran */
+#penawaran{padding: 40px 0px; background: #fffcef; border-bottom: 1px solid #ccc;}
+#penawaran .panel-body{}
+#penawaran h2{margin-bottom: 30px; letter-spacing: 2px; font-weight: 600;}
+.panel-body > i{color: #66bb6a;}
+.panel-body > h4{font-weight: bold;}
+/*--------------------------------------------------------------------------------------------*/
+
+/*  Product  */
+#product{padding: 5px 0px; background: #fff0a3;}
+#product h2{font-size: 16px; letter-spacing: 2px; font-weight: 600;}
+.product-item{width: 100%; height: 100%; margin: 1px 0px; padding: 5px 7px; background: #fff !important;}
+.search-box{width: 25%; margin:10px auto;}
+.jarak{margin: 20px 0px;}
+.tools{margin-top: 10px;}
+.product-description{padding: 10px 0px;}
+.input-number{ width: 20%; padding: 4px 5px; border: 1px solid #555; border-radius: 2px; margin-right: 2px;}
+
+/* Offers */
+
+
+.shape-text{
+	color:#fff; font-size:12px; font-weight:bold; position:relative; right:-40px; top:2px; white-space: nowrap;
+	-ms-transform:rotate(30deg); /* IE 9 */
+	-o-transform: rotate(360deg);  /* Opera 10.5 */
+	-webkit-transform:rotate(30deg); /* Safari and Chrome */
+	transform:rotate(30deg);
+}	
+.offer-content{
+	padding:0 20px 10px;
+}
+
+/* Button */
+.btn-default{background: #5c4f22; color: #efefef; border-color: #444;}
+.btn-default:hover{background: #77672d; color: #fff;}
+#ctn_menu button{}
+
+.menu-circle{ font-size: 12px; background: #5c4f22; margin:0px 3px; color: #efefef; height: 80px; width: 80px; border-radius: 40px; border: 5px solid #2d1d18; text-transform: uppercase; font-weight: bold;}
+.menu-circle:hover{background: #77672d; color: #fff;}
+
+
+
+/* Pagination */
+.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px; background: #a5d6a7; color: #43a047;}
+.pagination>li:hover a{background: #66bb6a; color: #fff;}
+.pagination>.active>a{background: #4caf50; border-color: #fff;}
+.pagination>.active:hover a{background: #43a047; border-color: #fff;}
+
+/* footer */
+#footer{background: url(../img/pattern.jpg) center center; padding: 40px 0px; border-top: 1px solid #bbb; color: #fff;}
+
+/* Sosmed */
+.sosmed{padding: 10px 0px;}
+
+
+/* -- login -- */
+#login{ padding: 63px 0px; background: #fff0a3;}
+.panel-default{border: none; border-radius: 0;}
+.panel-default > .panel-heading{background: #2d1d18; color: #efefef; border-radius: 0;}
+
+/*-- Cart --*/
+#cart{ padding: 30px 0px; background: #fff0a3; }
+
+/* -- Blog -- */
+#blog{
+    padding: 30px 0px;
+}
+
+/* --post-- */
+.post{
+    margin-top: 10px; border-radius: 4px; background: #fafafa; padding: 10px 5px;
+}
+
+#reseller{padding: 30px 0px;}
+#reseller h2{padding-bottom: 20px;}
+
+.billing{
+}
+
+/* Checkout */
+#checkout{ padding: 30px 0px; background : #fff0a3;}
+
+/* Register */
+#register{ padding: 30px 0px; background : #fff0a3;}
+
+
+/* ---- log waitress ----- */
+#log { padding: 10px 0px; margin: auto 20px; text-align: center;}
+
+.box{ width: 100%; background: white; padding: 5px; border-bottom: 1px dashed #999;}
+.box tr td{ padding: 3px 0px;}
+.box-item{ border-bottom: 1px dashed #888; width:98%; margin: 2px auto;}
+
+.min-gutter > [class*='col-'] {
+    padding-right:15px;
+    padding-left:15px;
+	
+}
+
+.less-gutter > [class*='col-'] {
+    padding-right:2px;
+    padding-left:2px;
+    
+}
+
+
+#meja{ padding: 10px 0px; background: #fff0a3; }
+
+.mejanya{ width: 100%; padding: 10px 0px; background: white; margin:1px; border-bottom: 4px solid #ccc; border-radius: 10px; cursor: pointer;}
+
+
+.clearfix { clear: both; }
+.promo{/*
+    background: white;
+    padding: 15px 25px;
+    position: fixed;
+    width: 170px;
+    height: 170px;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 3px;*/
+}
+
+.foo
+{
+    background : white;
+    
+    position : fixed;
+    background-repeat: no-repeat;
+    right: 5px;
+    bottom: 5px;
+    z-index: 5000;
+    background-position: right bottom;
+    border-radius: 3px;
+    padding: 10px 20px;
+    /*filter: alpha(opacity=25) progid:DXImageTransform.Microsoft.Alpha(opacity=25);*/
+}
+
+.foo .close{
+    right: 0;
+}
+
+.box-meja{
+    background: #444; color: #fcfcfc; width: 100%; padding: 10px 0px; text-transform: uppercase;
+    cursor: pointer;
+    margin: 3px 0px;
+}
+
+.is-red{ background: #e74c3c; color: white; border-bottom: 4px solid #c0392b; }
+.is-green{ background: #2ecc71; color: white; border-bottom: 4px solid #27ae60;}
+.is-white{ background: #fff; color: #444; border-bottom: 4px solid #ccc;}
+.is-rusak{ background: #222; color: white; border-bottom: 4px solid #e74c3c; }
+
+/* ----------------------- MOBILE FIRST ------------------------*/
+
+@media screen and (max-width: 450px){
+    .carousel-caption,.carousel-caption>h3{display: none;}
+    #penawaran{padding: 10px 0px;}
+    #penawaran .container .row >h2{font-size: 20px;}
+    .dropdown-menu li a>img{border: none;}
+    .menu-circle{height: 60px; width: 60px; margin-top: 3px;}
+    .search-box{width: 90%;}
+}
+
+@media screen and (min-width: 451px) and (max-width: 768px){
+    .carousel-caption>h3{font-size: 17px;}
+    .search-box{width: 70%;}
+}
+
+@media screen and (max-width: 1200px){
+
+}
+
+@media screen and (min-width: 1200px){
+
+}

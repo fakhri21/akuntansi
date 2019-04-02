@@ -11,23 +11,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>AdminLTE 2 | Starter</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/bootstrap/css/selectize.default.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/selectize.default.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/font-awesome.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/AdminLTE/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/dataTables.bootstrap.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/AdminLTE/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/custom.css">
-  <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap-datepicker3.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>/assets/css/bootstrap-datepicker3.css" rel="stylesheet">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/AdminLTE/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/skins/skin-blue.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,12 +42,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
  
  <!-- jQuery 2.2.3 -->
-  <script src="<?php echo base_url(); ?>assets/Jquery/jquery-3.2.1.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
   <!-- Jquery -->
-  <script src="<?php echo base_url();?>assets/Jquery/currencyFormatter.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url();?>assets/js/currencyFormatter.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>assets/js/cleave.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url();?>assets/js/numeral.js" type="text/javascript"></script>
-  <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url();?>assets/js/bootstrap-datepicker.js"></script>
   <script src="<?php echo base_url();?>assets/js/selectize.js" type="text/javascript"></script>
 
 <?php if ( astra_page_layout() == 'left-sidebar' ) : ?>
@@ -77,18 +75,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
           
 <!-- DataTables -->
-<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/dataTables.bootstrap.min.js"></script>
   
 <!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url(); ?>assets/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
 <!-- CUSTOM JS -->
 <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
 <!-- SPARKLINE -->
-<script src="<?php echo base_url(); ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.sparkline.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo base_url(); ?>assets/AdminLTE/dist/js/app.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/app.min.js"></script>
 <script type="text/javascript">
 
 </script>
