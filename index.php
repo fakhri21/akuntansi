@@ -312,4 +312,5 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+require('../../wp-load.php');
 require_once BASEPATH.'core/CodeIgniter.php';

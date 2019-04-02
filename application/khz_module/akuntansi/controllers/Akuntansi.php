@@ -10,16 +10,16 @@ class Akuntansi extends CI_Controller {
 
         parent::__construct();
         $this->load->model(array('Model_Admin','Model_Akuntansi'));
-        $this->load->library(array('session','konfigurasi', 'form_validation'));
+        $this->load->library(array('session','form_validation'));
         $this->load->library('datatables');
         $this->load->helper(array('form', 'url'));
         $this->load->helper('exportexcel_helper');
         $this->load->vars(array('data_admin' => $this->data_admin));
         $user = wp_get_current_user();
-         if ( !in_array( 'akunting', (array) $user->roles ) ) {
+         /* if ( !in_array( 'akunting', (array) $user->roles ) ) {
                 
                 redirect(base_url('denied'));
-            }
+            } */
          
     }
     
