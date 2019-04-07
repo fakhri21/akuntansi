@@ -14,7 +14,6 @@ class Tutup_buku extends CI_Controller
         $this->load->model('Model_Tutup_Buku');
         $this->load->library('form_validation');        
 	      $this->load->library('datatables');
-	      $this->load->library('konfigurasi');
         $this->priode_hari=get_option('buka_akuntansi');
         $this->priode_bulan=get_option('buka_akuntansi_bulan');
     }

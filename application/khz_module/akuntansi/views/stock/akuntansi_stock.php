@@ -295,7 +295,7 @@ function tambah_item() {
 				'keterangan':$('#keterangan').val()}
 
 	$.post('akuntansi/tambahitem/',data,function (response) {
-        alert("Berahasil Menambahkan");
+        alertify.success("Berahasil Menambahkan");
         refresh_table("mytable");
 	})
 }
@@ -307,7 +307,7 @@ function refresh_table(id) {
 function hapusitemcart(rowid) {
         var data={tes:'0'};
         $.post("akuntansi/hapusitemcart/"+rowid+"",data,function (pesan) {
-          alert(pesan)
+          alertify.success(pesan)
           refresh_table("mytable")
         })
 }
@@ -315,7 +315,7 @@ function hapusitemcart(rowid) {
 function simpan_voucher() {
         var data={tes:'0'}
         $.post('akuntansi/simpan_stock',data,function(params) {
-        alert("Berhasil melakukan pembayaran")
+        alertify.success("Berhasil melakukan pembayaran")
         location.href=params
         })
 }
@@ -327,7 +327,7 @@ function posting_jurnal() {
         }
         
         $.post('akuntansi/ubahstatus/'+uniqid+'/1',data,function(params) {
-        alert("Berhasil Memposting")
+        alertify.success("Berhasil Memposting")
         window.location.reload()
         })
 }

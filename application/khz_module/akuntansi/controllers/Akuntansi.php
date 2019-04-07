@@ -109,7 +109,7 @@ class Akuntansi extends CI_Controller {
     /* Cash and Bank */
     public function kasdanbank()
     {
-        $status=$this->konfigurasi->priode_harian_akuntansi();
+        $status=get_option('buka_akuntansi');
         if ($status=='') {
             $this->session->set_flashdata('message_failed', 'Buka Akuntansi terlebih dahulu');
             redirect('tutup_buku','refresh');
@@ -202,7 +202,7 @@ class Akuntansi extends CI_Controller {
 /* Jurnal Umum */
     public function jurnalumum()
     {
-        $status=$this->konfigurasi->priode_harian_akuntansi();
+        $status=get_option('buka_akuntansi');
         if ($status=='') {
             $this->session->set_flashdata('message_failed', 'Buka Akuntansi terlebih dahulu');
             redirect('tutup_buku','refresh');

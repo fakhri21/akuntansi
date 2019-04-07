@@ -250,7 +250,7 @@ function tambah_kasbank() {
     'keterangan':$('#keterangan').val()}
 
     $.post('<?php echo base_url("akuntansi/tambahkasbank/"); ?>'+type+'',data,function (response) {
-        alert("Berhasil Menambahkan");
+        alertify.success("Berhasil Menambahkan");
         refresh_table("mytable");
     })
 }
@@ -262,7 +262,7 @@ function refresh_table(id) {
 function hapusitemcart(rowid) {
     var data={tes:'0'};
     $.post("<?php echo base_url('akuntansi/hapusitemcart/'); ?>"+rowid+"",data,function (pesan) {
-      alert(pesan)
+      alertify.success(pesan)
       refresh_table("mytable")
   })
 }
@@ -273,7 +273,7 @@ function simpan_voucher() {
         data={'uniqid':uniqid}
     }
     $.post('<?php echo base_url("akuntansi/simpan_kasbank/"); ?>',data,function(params) {
-        alert("Berhasil Menyimpan")
+        alertify.success("Berhasil Menyimpan")
         location.href=params
         })
 }
@@ -282,7 +282,7 @@ function posting_jurnal() {
 
 
     $.post('<?php echo base_url("akuntansi/ubahstatus/"); ?>'+uniqid+'/1','',function(params) {
-        alert("Berhasil Memposting")
+        alertify.success("Berhasil Memposting")
         window.location.reload()
     })
 }
