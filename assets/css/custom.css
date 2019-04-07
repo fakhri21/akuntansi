@@ -94,11 +94,6 @@
 
 /* bagian hero */
 
-body {
-    padding-top: 90px;
-}
-
-
 /* buttons */
 .btn-custom{
     background: #1C1D18;
@@ -240,7 +235,7 @@ body {
 /* -- login -- */
 #login{ padding: 63px 0px; background: #fff0a3;}
 .panel-default{border: none; border-radius: 0;}
-.panel-default > .panel-heading{background: #2d1d18; color: #efefef; border-radius: 0;}
+.card > .card-header{background: #2d1d18; color: #efefef; border-radius: 0;}
 
 /*-- Cart --*/
 #cart{ padding: 30px 0px; background: #fff0a3; }
