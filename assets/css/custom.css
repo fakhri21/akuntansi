@@ -220,10 +220,10 @@
 
 
 /* Pagination */
-.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px; background: #a5d6a7; color: #43a047;}
+/*.pagination>li>a, .pagination>li>span { border-radius: 50% !important;margin: 0 5px; background: #a5d6a7; color: #43a047;}
 .pagination>li:hover a{background: #66bb6a; color: #fff;}
 .pagination>.active>a{background: #4caf50; border-color: #fff;}
-.pagination>.active:hover a{background: #43a047; border-color: #fff;}
+.pagination>.active:hover a{background: #43a047; border-color: #fff;} */
 
 /* footer */
 #footer{background: url(../img/pattern.jpg) center center; padding: 40px 0px; border-top: 1px solid #bbb; color: #fff;}
