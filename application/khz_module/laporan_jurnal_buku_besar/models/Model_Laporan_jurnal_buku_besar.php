@@ -15,7 +15,7 @@ function laporanjurnal($hari,$hari_akhir)
                         kredit,invers_kredit,
                         keterangan,
                         (@row:=@row+1) as id_row');
-    $this->db->from('laporan_jurnal,(select @row:=0)as r');
+    $this->db->from('akuntansi_laporan_jurnal,(select @row:=0)as r');
     $this->db->where('status',1);
     if ($hari<>NULL) {
         $this->db->where('date(eod) between date('.$hari.') and date('.$hari_akhir.')' );
@@ -31,19 +31,19 @@ function laporanjurnal($hari,$hari_akhir)
 //Buku besar
 function buku_besar($coa,$hari,$hari_akhir)
 {    
-    $this->db->select('DATE_FORMAT(waktu,"%d-%m-%Y") as waktu,id_detail,keterangan,debit,kredit,id_coa,nama_coa,(x.saldo_sebelumnya+buku_besar.saldo_awal)as saldo_awal_ok,(x.saldo_sebelumnya+buku_besar.saldo_awal+@s:=@s+nilai_voucher) as saldo');
+    $this->db->select('DATE_FORMAT(waktu,"%d-%m-%Y") as waktu,id_detail,keterangan,debit,kredit,id_coa,nama_coa,(x.saldo_sebelumnya+akuntansi_buku_besar.saldo_awal)as saldo_awal_ok,(x.saldo_sebelumnya+akuntansi_buku_besar.saldo_awal+@s:=@s+nilai_voucher) as saldo');
     if ($hari<>NULL) {
-        $this->db->from('buku_besar,
+        $this->db->from('akuntansi_buku_besar,
                     (select @s:=0) as v_saldo,
-                    (select sum(if(DATE(eod)<DATE('.$hari.'),(nilai_voucher),0)) as saldo_sebelumnya from buku_besar where id_coa='.$coa.' ) as x 
+                    (select sum(if(DATE(eod)<DATE('.$hari.'),(nilai_voucher),0)) as saldo_sebelumnya from akuntansi_buku_besar where id_coa='.$coa.' ) as x 
                     ');
         $this->db->where('eod between date('.$hari.') and date('.$hari_akhir.')' );
     
     }
     else {
-        $this->db->from('buku_besar,
+        $this->db->from('akuntansi_buku_besar,
                     (select @s:=0) as v_saldo0,
-                    (select sum(if(DATE(eod)<curdate() and date(eod)>0,(nilai_voucher),0)) as saldo_sebelumnya from buku_besar where id_coa='.$coa.' ) as x 
+                    (select sum(if(DATE(eod)<curdate() and date(eod)>0,(nilai_voucher),0)) as saldo_sebelumnya from akuntansi_buku_besar where id_coa='.$coa.' ) as x 
                     ');    
         $this->db->where('eod',0);
     }

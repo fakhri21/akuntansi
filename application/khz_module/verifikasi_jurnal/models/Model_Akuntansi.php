@@ -341,7 +341,7 @@ function list_voucher($status,$tipe)
     $this->db->select('a.id_voucher,
                         concat(id_tipe_voucher,DATE_FORMAT(a.waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,
                         uniqid');
-		$this->db->from('h_akuntansi_voucher a');
+		$this->db->from('akuntansi_h_voucher a');
 		
         if (isset($status)) {
             $this->db->where('status', $status);
@@ -416,7 +416,7 @@ function stockopname($table,$table_stock,$data,$uniqid)
 /* Verifikasi Jurnal */
 function jsondaftarjurnal() {
     $this->datatables->select('uniqid,id_voucher,concat(id_tipe_voucher,DATE_FORMAT(waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,DATE_FORMAT(waktu,"%d-%m-%Y") as waktu,status');
-    $this->datatables->from('h_akuntansi_voucher');
+    $this->datatables->from('akuntansi_h_voucher');
     $this->datatables->add_column('action',"tes");
     return $this->datatables->generate();
 }
@@ -431,8 +431,8 @@ function tampilvoucher($uniqid)
 							(b.debit-b.kredit) as price,
                             b.keterangan
 							');
-		$this->db->from('h_akuntansi_voucher a');
-		$this->db->join('detail_akuntansi_voucher b','a.uniqid=b.uniqid_voucher','left');	
+		$this->db->from('akuntansi_h_voucher a');
+		$this->db->join('akuntansi_detail_voucher b','a.uniqid=b.uniqid_voucher','left');	
 		$this->db->where('a.uniqid',$uniqid);
         $this->db->group_by('b.id_session');
         $this->db->order_by('id_detail', 'asc');
@@ -447,9 +447,9 @@ function tampilstock($uniqid)
     $this->db->select('b.*,
                       concat(id_tipe_voucher,DATE_FORMAT(a.waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,
 						a.id_tipe_voucher');
-		$this->db->from('h_akuntansi_voucher a');
+		$this->db->from('akuntansi_h_voucher a');
 		$this->db->join('laporan_stock b','a.uniqid=b.uniqid_voucher','left');	
-		//$this->db->join('detail_akuntansi_stock c','a.uniqid=c.uniqid_voucher','left');	
+		//$this->db->join('akuntansi_detail_stock c','a.uniqid=c.uniqid_voucher','left');	
 		$this->db->where('a.uniqid',$uniqid);
         //$this->db->group_by('b.id_session');
 
@@ -462,7 +462,7 @@ function ubahstatus($uniqid,$data)
     
     $this->db->where('uniqid', $uniqid);
     $this->db->where('status', 0);
-    $this->db->update('h_akuntansi_voucher', $data);
+    $this->db->update('akuntansi_h_voucher', $data);
     
 }
 

@@ -59,7 +59,7 @@ class Akuntansi extends CI_Controller {
     } 
     public function hapus_item($id)
     {
-        if($this->Model_Akuntansi->hapus_item('detail_akuntansi_voucher',$id))
+        if($this->Model_Akuntansi->hapus_item('akuntansi_detail_voucher',$id))
         {
             echo "Berhasil Menghapus";
         }

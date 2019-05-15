@@ -42,7 +42,7 @@ if (!empty($this->session->flashdata('message_failed'))) {
                     <div class="row">
                         <div class="col">
                             <p class="lead">Laporan Jurnal</p>
-                            <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>akuntansi/laporanjurnal">
+                            <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>laporan_jurnal_buku_besar/laporanjurnal">
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-prepend">

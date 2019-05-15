@@ -41,7 +41,7 @@ class Laporan_jurnal_buku_besar extends CI_Controller {
         
         if (!$data['record']) {
                 $this->session->set_flashdata('message_failed', 'Data Tidak Ditemukan');
-                redirect(base_url('laporan_jurnal_buku_besar/panel_laporan_jurnal_buku_besar'),'refresh');
+                redirect(base_url('laporan_jurnal_buku_besar'),'refresh');
                 
         }
 
@@ -141,7 +141,7 @@ class Laporan_jurnal_buku_besar extends CI_Controller {
         
         if (!$data['record']) {
                 $this->session->set_flashdata('message_failed', 'Data Tidak Ditemukan');
-                redirect(base_url('laporan_jurnal_buku_besar/panel_laporan_jurnal_buku_besar'),'refresh');
+                redirect(base_url('laporan_jurnal_buku_besar'),'refresh');
                 
         }
             

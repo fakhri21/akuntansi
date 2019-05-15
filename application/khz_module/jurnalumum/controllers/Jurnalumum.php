@@ -76,13 +76,13 @@ class Jurnalumum extends CI_Controller {
             $uniqid=uniqid("JU",TRUE);
             //Header
              $data = array('id_tipe_voucher' =>'JU' );
-            $this->Model_Jurnalumum->simpan_voucher('h_akuntansi_voucher',$data,$uniqid);
+            $this->Model_Jurnalumum->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
         }
         
         //Detail Pemesanan
         foreach ($this->cart->contents() as $items) {
         $id_session=$items['options']['id_session'];
-            $this->Model_Jurnalumum->detail_voucher('detail_akuntansi_voucher',$items['options']['item'],$uniqid,$id_session);
+            $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['options']['item'],$uniqid,$id_session);
         }
         
         $this->cart->destroy();

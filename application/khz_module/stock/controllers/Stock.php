@@ -76,13 +76,13 @@ class Stock extends CI_Controller {
         $uniqid=uniqid("ST",TRUE);
          //Header
          $data = array('id_tipe_voucher' =>'ST' );
-        $this->Model_Stock->simpan_voucher('h_akuntansi_voucher',$data,$uniqid);
+        $this->Model_Stock->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
         
         //Detail Voucher
         foreach ($this->cart->contents() as $items) {
-            $this->Model_Stock->detail_voucher('detail_akuntansi_voucher',$items['options']['record'],$uniqid,$items['rowid']);
-            $this->Model_Stock->detail_voucher('detail_akuntansi_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
-            $this->Model_Stock->detail_stock('detail_akuntansi_stock',$items['options']['stock'],$uniqid);
+            $this->Model_Stock->detail_voucher('akuntansi_detail_voucher',$items['options']['record'],$uniqid,$items['rowid']);
+            $this->Model_Stock->detail_voucher('akuntansi_detail_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
+            $this->Model_Stock->detail_stock('akuntansi_detail_stock',$items['options']['stock'],$uniqid);
         }
         $this->cart->destroy();
         
@@ -140,11 +140,11 @@ class Stock extends CI_Controller {
          //Header
          $data = array('id_tipe_voucher' =>'SO',
                         'status'=>1, );
-        $this->Model_Stock->simpan_voucher('h_akuntansi_voucher',$data,$uniqid);
+        $this->Model_Stock->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
         
         //Detail Voucher
         foreach ($this->cart->contents() as $items) {
-           $feedback= $this->Model_Stock->stockopname('detail_akuntansi_voucher','detail_akuntansi_stock',$items['options'],$uniqid);
+           $feedback= $this->Model_Stock->stockopname('akuntansi_detail_voucher','akuntansi_detail_stock',$items['options'],$uniqid);
             print_r($feedback);
         }
         $this->cart->destroy();

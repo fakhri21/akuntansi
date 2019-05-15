@@ -84,7 +84,7 @@
 </style>
 
     <div>
-        <h1 class="my-0 display-1">Laporan Buku Besar</h1>
+        <h1 class="my-0 display-1">Laporan Jurnal</h1>
         <div class="separator w-100-p mt-8"></div><br />
         <h2 class="my-0 mt-8"><?php echo  get_option( 'nama_perusahaan' ) ?></h2>
         <h3 class="my-0"><?php echo  get_option( 'sub_nama_perusahaan' ) ?></h3>

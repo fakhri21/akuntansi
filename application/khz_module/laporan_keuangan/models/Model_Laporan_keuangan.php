@@ -10,7 +10,7 @@ function trial_balance($hari)
                                 sum(nilai_debit) as saldo_debit,
                                 sum(nilai_kredit) as saldo_kredit,
                                 eod');
-            $this->db->from('trial_balance');
+            $this->db->from('akuntansi_trial_balance');
             if ($hari) {
             $this->db->where('eod <= '.$hari.'');
             }
@@ -37,7 +37,7 @@ function labarugi($hari,$bagian='4010000')
                             '.$total_saldo_berjalan.',
                             (@s:=id_coa)
                             ',FALSE);
-            $this->db->from('laba_rugi,(select @s:=0,@kat:=0) as v_saldo,(select @s_awal:=0) as a_saldo');
+            $this->db->from('akuntansi_laba_rugi,(select @s:=0,@kat:=0) as v_saldo,(select @s_awal:=0) as a_saldo');
             $this->db->where('id_kategori',$bagian);
             if ($hari) {
             $this->db->where('(Year(eod) = Year('.$hari.') or (eod is null and saldo_awal<>0))');
@@ -64,7 +64,7 @@ function labarugi_kelompok($hari,$bagian='4010000')
                             '.$total_saldo_berjalan.',
                             (@s:=id_coa)
                             ',FALSE);
-            $this->db->from('laba_rugi,(select @s:=0,@kat:=0) as v_saldo,(select @s_awal:=0) as a_saldo');
+            $this->db->from('akuntansi_laba_rugi,(select @s:=0,@kat:=0) as v_saldo,(select @s_awal:=0) as a_saldo');
             $this->db->where('id_kategori',$bagian);
             if ($hari) {
             $this->db->where('(Year(eod) = Year('.$hari.') or (eod is null and saldo_awal<>0))');
@@ -91,7 +91,7 @@ function neraca($hari,$bagian='=1')
                             '.$total_saldo_berjalan.', 
                             (@s:=id_coa) 
                             ',FALSE);
-            $this->db->from('   neraca,
+            $this->db->from('   akuntansi_neraca,
                                 (select @s:=0,@kat:=0) as v_saldo,
                                 (select @s_awal:=0) as xde');
             $this->db->where('left(id_coa,1)'.$bagian.'');
@@ -122,7 +122,7 @@ function neraca_kelompok($hari,$bagian='=1')
                             '.$total_saldo_berjalan.', 
                             (@s:=id_coa) 
                             ',FALSE);
-            $this->db->from('   neraca,
+            $this->db->from('   akuntansi_neraca,
                                 (select @s:=0,@kat:=0) as v_saldo,
                                 (select @s_awal:=0) as xde');
             $this->db->where('left(id_coa,1)'.$bagian.'');

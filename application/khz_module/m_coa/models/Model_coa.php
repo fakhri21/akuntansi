@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Model_coa extends CI_Model
 {
 
-    public $table = 'm_coa';
+    public $table = 'akuntansi_m_coa';
     public $id = 'uniqid';
     public $order = 'DESC';
 
@@ -20,23 +20,23 @@ class Model_coa extends CI_Model
     {
         $data = $this->db->query(
             'SELECT
-                m_akuntansi_kategori.uniqid,
-                m_akuntansi_kategori.nama_kategori,
-                m_kelompok_coa.uniqid as kel_uniqid,
-                m_kelompok_coa.nama_kelompok_coa,
-                m_coa.uniqid as coa_id,
-                m_coa.id_coa,
-                m_coa.nama_coa
+                akuntansi_m_kategori.uniqid,
+                akuntansi_m_kategori.nama_kategori,
+                akuntansi_m_kelompok_coa.uniqid as kel_uniqid,
+                akuntansi_m_kelompok_coa.nama_kelompok_coa,
+                akuntansi_m_coa.uniqid as coa_id,
+                akuntansi_m_coa.id_coa,
+                akuntansi_m_coa.nama_coa
             FROM
-                m_akuntansi_kategori
+                akuntansi_m_kategori
             LEFT JOIN
-                m_kelompok_coa
+                akuntansi_m_kelompok_coa
             ON 
-                m_akuntansi_kategori.uniqid = m_kelompok_coa.id_kategori
+                akuntansi_m_kategori.uniqid = akuntansi_m_kelompok_coa.id_kategori
             LEFT JOIN
-                m_coa
+                akuntansi_m_coa
             ON
-                m_kelompok_coa.uniqid = m_coa.id_kelompok_coa');
+                akuntansi_m_kelompok_coa.uniqid = m_coa.id_kelompok_coa');
 
         $tabel = $data->result_array();
         $result = [];
@@ -83,14 +83,14 @@ class Model_coa extends CI_Model
     // get data by uniqid
     function get_coa($id)
     {
-        $coa = $this->db->get_where('m_coa', array('uniqid' => $id));
+        $coa = $this->db->get_where('akuntansi_m_coa', array('uniqid' => $id));
         return $coa->result_array();
     }
 
     // get data by id
     function get_coa_id($id)
     {
-        $coa = $this->db->get_where('m_coa', array('id_coa' => $id));
+        $coa = $this->db->get_where('akuntansi_m_coa', array('id_coa' => $id));
         return $coa->result_array();
     }
 
@@ -107,7 +107,7 @@ class Model_coa extends CI_Model
             );
             $this->db->set($data);
             $this->db->where('uniqid', $_POST['uniqid']);
-            return $this->db->update('m_coa');
+            return $this->db->update('akuntansi_m_coa');
         }
     }
 
@@ -124,7 +124,7 @@ class Model_coa extends CI_Model
                 'quantity' => $_POST['quantity'],
             );
 
-                $this->db->insert('m_coa', $data);
+                $this->db->insert('akuntansi_m_coa', $data);
                 return $this->db->insert_id();
         }
     }

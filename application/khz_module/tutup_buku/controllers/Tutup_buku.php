@@ -64,7 +64,7 @@ class Tutup_buku extends CI_Controller
       if (isset($_POST['buka'])) {
         redirect(base_url('tutup_buku/buka_akuntansi'));
       }else{
-        $this->Model_Tutup_Buku->eod('h_akuntansi_voucher',$this->priode_hari);
+        $this->Model_Tutup_Buku->eod('akuntansi_h_voucher',$this->priode_hari);
         $this->jurnal_ikhtisarrugilaba($this->priode_hari,700000,320002);
         update_option('buka_akuntansi','');
         $this->session->set_flashdata('message_success', 'Berhasil EOD akuntansi');
@@ -78,7 +78,7 @@ class Tutup_buku extends CI_Controller
        if (isset($_POST['buka'])) {
         redirect(base_url('tutup_buku/buka_akuntansi_bulan'));
       }else{
-        $this->Model_Tutup_Buku->eom('h_akuntansi_voucher',$this->priode_bulan);
+        $this->Model_Tutup_Buku->eom('akuntansi_h_voucher',$this->priode_bulan);
         $this->session->set_flashdata('message_success', 'Berhasil EOM akuntansi');
         redirect(base_url('tutup_buku'));
       }
@@ -86,7 +86,7 @@ class Tutup_buku extends CI_Controller
 
     public function eoy()
     {
-      //$this->Model_Tutup_Buku->eoy('h_akuntansi_voucher',$data);
+      //$this->Model_Tutup_Buku->eoy('akuntansi_h_voucher',$data);
       $this->reset_akuntansi();
       $this->session->set_flashdata('message_success', 'Berhasil EOY akuntansi');
 
@@ -103,23 +103,23 @@ class Tutup_buku extends CI_Controller
           $this->Model_Tutup_Buku->reset_saldo_awal($data_coa['id_coa']);
         }
         
-        $this->db->query('INSERT INTO bck_detail_akuntansi_voucher
+        $this->db->query('INSERT INTO akuntansi_bck_detail_voucher
                           SELECT *
-                          FROM detail_akuntansi_voucher');
+                          FROM akuntansi_detail_voucher');
                           
-        $this->db->query('INSERT INTO bck_detail_akuntansi_stock
+        $this->db->query('INSERT INTO akuntansi_bck_detail_stock
                           SELECT *
-                          FROM detail_akuntansi_stock');
+                          FROM akuntansi_detail_stock');
                           
-        $this->db->query('INSERT INTO bck_h_akuntansi_voucher
+        $this->db->query('INSERT INTO akuntansi_bck_h_voucher
                           SELECT *
-                          FROM h_akuntansi_voucher');
+                          FROM akuntansi_h_voucher');
         $this->db->where('year(eod)<>0');
-        $this->db->delete('h_akuntansi_voucher');
+        $this->db->delete('akuntansi_h_voucher');
         
-        $this->db->query('ALTER TABLE h_akuntansi_voucher AUTO_INCREMENT = 1');
-        $this->db->query('ALTER TABLE detail_akuntansi_voucher AUTO_INCREMENT = 1');
-        $this->db->query('ALTER TABLE detail_akuntansi_stock AUTO_INCREMENT = 1');
+        $this->db->query('ALTER TABLE akuntansi_h_voucher AUTO_INCREMENT = 1');
+        $this->db->query('ALTER TABLE akuntansi_detail_voucher AUTO_INCREMENT = 1');
+        $this->db->query('ALTER TABLE akuntansi_detail_stock AUTO_INCREMENT = 1');
     }
      
 
@@ -157,10 +157,10 @@ class Tutup_buku extends CI_Controller
                         'id_tipe_voucher' =>'JU',    
                         'status' =>'1',    
                         'eod' =>$hari );    
-        $this->Model_Tutup_Buku->simpan_voucher('h_akuntansi_voucher',$data,$uniqid);
+        $this->Model_Tutup_Buku->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
       //Detail
-      $this->Model_Tutup_Buku->detail_voucher('detail_akuntansi_voucher',$record,$uniqid,$session);
-      $this->Model_Tutup_Buku->detail_voucher('detail_akuntansi_voucher',$inversrecord,$uniqid,$session);
+      $this->Model_Tutup_Buku->detail_voucher('akuntansi_detail_voucher',$record,$uniqid,$session);
+      $this->Model_Tutup_Buku->detail_voucher('akuntansi_detail_voucher',$inversrecord,$uniqid,$session);
     }
 
   /*   public function _rules() 

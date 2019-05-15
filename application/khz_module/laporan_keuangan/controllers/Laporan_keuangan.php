@@ -52,7 +52,7 @@ class Laporan_keuangan extends CI_Controller {
         
              if (!$data['isi']) {
                 $this->session->set_flashdata('message_failed', 'Data Tidak Ditemukan');
-                redirect(base_url('laporan_keuangan/panel_laporan_keuangan'),'refresh');
+                redirect(base_url('laporan_keuangan'),'refresh');
             }
  
             $data['hari']=$_POST['hari'];
@@ -531,7 +531,7 @@ class Laporan_keuangan extends CI_Controller {
         
             if (!$data['record']) {
                 $this->session->set_flashdata('message_failed', 'Data Tidak Ditemukan');
-                redirect(base_url('laporan_keuangan/panel_laporan_keuangan'),'refresh');
+                redirect(base_url('laporan_keuangan'),'refresh');
             }
 
             $data['hari']=$_POST['hari'];

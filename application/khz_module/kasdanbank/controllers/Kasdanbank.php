@@ -76,13 +76,13 @@ class Kasdanbank extends CI_Controller {
             //Header Kas Bank
 
             $data = array('id_tipe_voucher' =>'KB' );
-            $this->Model_Kasdanbank->simpan_voucher('h_akuntansi_voucher',$data,$uniqid);
+            $this->Model_Kasdanbank->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
         }
         
         //Detail Voucher Kas Bank
         foreach ($this->cart->contents() as $items) {
-            $this->Model_Kasdanbank->detail_voucher('detail_akuntansi_voucher',$items['options']['record'],$uniqid,$items['rowid']);
-            $this->Model_Kasdanbank->detail_voucher('detail_akuntansi_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
+            $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['record'],$uniqid,$items['rowid']);
+            $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
         }
         $this->cart->destroy();
         echo base_url('verifikasi_jurnal/print_voucher/'.$uniqid.'');   
