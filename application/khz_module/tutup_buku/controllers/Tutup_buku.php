@@ -42,9 +42,18 @@ class Tutup_buku extends CI_Controller
     
     public function buka_akuntansi()
     {
-      $batas_bulan= stripslashes("\'".$this->priode_bulan."\'");
+      //$batas_bulan= stripslashes("\'".$this->priode_bulan."\'");
+      $batas_bulan= date_create($this->priode_bulan);
+      $hari_ini=date_create(current_time('mysql'));
 
-      $this->Model_Tutup_Buku->buka_akuntansi($batas_bulan);    
+      if ($hari_ini>$batas_bulan) {
+        update_option('buka_akuntansi',current_time( 'mysql' ));
+      }
+      else {
+        update_option('buka_akuntansi',$this->priode_bulan);
+      }
+
+      //$this->Model_Tutup_Buku->buka_akuntansi($batas_bulan);    
       $this->session->set_flashdata('message_success', 'Berhasil Buka akuntansi');
       redirect(base_url('tutup_buku'));
     }

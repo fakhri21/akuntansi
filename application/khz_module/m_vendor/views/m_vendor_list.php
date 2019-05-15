@@ -1,28 +1,36 @@
-<div class="container">
-    <div class="box box-primary">
-        <div class="box-header">
-            <h1 class="display-4">Daftar Voucher Jurnal</h1>
-        </div>
-        <div class="box-body"> 
-             <table class="table table-bordered table-striped" id="mytable">
-            <thead>
-                <tr>
-                    <th width="80px">No</th>
-            <th>Id Voucher</th>
-            <th>Waktu</th>
-            <th>Status</th>
-            <th width="200px">Action</th>
-                </tr>
-            </thead>
-        
-        </table>
-        </div>
-    </div>
-
-</div>
+<!doctype html>
+<html>
+    <head>
+        <title>harviacode.com - codeigniter crud generator</title>
+        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
+        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
+        <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
+        <style>
+            .dataTables_wrapper {
+                min-height: 500px
+            }
+            
+            .dataTables_processing {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                margin-left: -50%;
+                margin-top: -25px;
+                padding-top: 20px;
+                text-align: center;
+                font-size: 1.2em;
+                color:grey;
+            }
+            body{
+                padding: 15px;
+            }
+        </style>
+    </head>
+    <body>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <h2 style="margin-top:0px"></h2>
+                <h2 style="margin-top:0px">M_vendor List</h2>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 4px"  id="message">
@@ -30,14 +38,29 @@
                 </div>
             </div>
             <div class="col-md-4 text-right">
- 	    </div>
+                <?php echo anchor(site_url('m_vendor/create'), 'Create', 'class="btn btn-primary"'); ?>
+	    </div>
         </div>
-       
-       
+        <table class="table table-bordered table-striped" id="mytable">
+            <thead>
+                <tr>
+                    <th width="80px">No</th>
+		    <th>Id Vendor</th>
+		    <th>Name</th>
+		    <th>Email</th>
+		    <th>Alamat</th>
+		    <th>No Telp</th>
+		    <th>Whatsapp</th>
+		    <th width="200px">Action</th>
+                </tr>
+            </thead>
+	    
+        </table>
+        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
+        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                $.fn.dataTable.ext.classes.sPageButton = 'btn btn-primary mx-1'; // Change Pagination Button Class
-                $.fn.dataTableExt.classes.sWrapper = "dataTables_wrapper col mt-2 dt-bootstrap";
                 $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
                 {
                     return {
@@ -66,13 +89,13 @@
                         sProcessing: "loading..."
                     },
                     processing: true,
-                    serverSide: false,
-                    ajax: {"url": "akuntansi/jsondaftarjurnal", "type": "POST"},
+                    serverSide: true,
+                    ajax: {"url": "m_vendor/json", "type": "POST"},
                     columns: [
                         {
                             "data": "uniqid",
                             "orderable": false
-                        },{"data": "id_voucherjurnal"},{"data": "waktu"},{"data": "status"},
+                        },{"data": "id_vendor"},{"data": "name"},{"data": "email"},{"data": "alamat"},{"data": "no_telp"},{"data": "whatsapp"},
                         {
                             "data" : "action",
                             "orderable": false,
@@ -85,30 +108,10 @@
                         var page = info.iPage;
                         var length = info.iLength;
                         var index = page * length + (iDisplayIndex + 1);
-                        var status='<label class="label label-success">Sudah Bayar</label>'
-                        var aksi='<a href="akuntansi/detail_voucher/'+data.uniqid+'">Detail</a> || '
-                        var aksi=aksi+'<a href="akuntansi/print_voucher/'+data.uniqid+'">PRINT</a> || '
-                     
-
-                        if (data.status==0) {
-                            status='<label class="label label-warning">Pending</label>'
-                            var aksi=aksi+'<a onclick="javasciprt: return confirm(\'Are You Sure ?\')" href="akuntansi/ubahstatus/'+data.uniqid+'/1">POSTING</a> || '
-                            var aksi=aksi+'<a onclick="javasciprt: return confirm(\'Are You Sure ?\')" href="akuntansi/ubahstatus/'+data.uniqid+'/2">VOID</a> || '
-                     
-                     
-                        }
-                        else if(data.status==1){
-                            status='<label class="label label-primary">Terposting</label>'
-
-                        }
-                        else{
-                            status='<label class="label label-danger">Void</label>'
-                        }
-
                         $('td:eq(0)', row).html(index);
-                        $('td:eq(3)', row).html(status);
-                        $('td:eq(4)', row).html(aksi);
                     }
                 });
             });
         </script>
+    </body>
+</html>

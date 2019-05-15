@@ -24,7 +24,7 @@ justify-content: center;
       </a>
     </div>
   </div>
-  <!-- <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
+  <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi" >
       <a href="<?php echo base_url('m_kelompok_coa')?>" class="text-center">
         <i class="fa fa-book fa-2x"></i>
@@ -40,7 +40,7 @@ justify-content: center;
       </a>
     </div>
   </div>
- -->
+
   
 </div><!-- /row -->
 </div><!-- /col 12 -->
@@ -49,7 +49,7 @@ justify-content: center;
 <div class="row">
   <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi" >
-      <a href="<?php echo base_url('laporan_keuangan')?>" class="text-center">
+      <a href="<?php echo base_url('akuntansi/panel_laporan_keuangan')?>" class="text-center">
         <i class="fa fa-dollar fa-2x"></i>
         <h4>Laporan Keuangan</h4>
       </a>
@@ -57,7 +57,7 @@ justify-content: center;
   </div>
   <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi">
-      <a href="<?php echo base_url('laporan_jurnal_buku_besar')?>"  class="text-center">
+      <a href="<?php echo base_url('akuntansi/panel_laporan_jurnal_buku_besar')?>"  class="text-center">
         <i class="fa fa-book fa-2x"></i>
         <h4>Laporan Jurnal & Buku Besar</h4>
       </a>
@@ -65,7 +65,7 @@ justify-content: center;
   </div>
   <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi">
-      <a href="<?php echo base_url('verifikasi_jurnal')?>" class="text-center">
+      <a href="<?php echo base_url('akuntansi/verifikasi_jurnal')?>" class="text-center">
         <i class="fa fa-book fa-2x"></i>
         <h4>Voucher Akuntansi</h4>
       </a>
@@ -80,7 +80,7 @@ justify-content: center;
   
   <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi" >
-      <a href="<?php echo base_url('kasdanbank')?>" class="text-center">
+      <a href="<?php echo base_url('akuntansi/kasdanbank')?>" class="text-center">
         <i class="fa fa-bank fa-2x"></i>
         <h4>Kas &amp; Bank</h4>
       </a>
@@ -88,7 +88,7 @@ justify-content: center;
   </div>
   <div class=" col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi" >
-      <a href="<?php echo base_url('jurnalumum')?>" class="text-center">
+      <a href="<?php echo base_url('akuntansi/jurnalumum')?>" class="text-center">
         <i class="fa fa-file-text-o fa-2x"></i>
         <h4>Jurnal umum</h4>
       </a>
@@ -96,7 +96,7 @@ justify-content: center;
   </div>
   <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
     <div class="box-akuntansi" >
-      <a href="<?php echo base_url('stock')?>" class="text-center">
+      <a href="<?php echo base_url('akuntansi/panel_stock')?>" class="text-center">
         <i class="fa fa-cube fa-2x"></i>
         <h4>Stock</h4>
       </a>
