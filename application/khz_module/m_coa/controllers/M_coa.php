@@ -52,14 +52,12 @@ class M_coa extends CI_Controller
         echo json_encode($this->Model_coa->add_coa());
     }
 
-   
-
     public function create() 
     {
         $data = array(
             'button' => 'Tambah',
             'action' => base_url('m_coa/create_action'),
-	    'uniqid' => set_value('uniqid'),
+	    'uniqid' => uniqid("COA",TRUE),
 	    'id_coa' => set_value('id_coa'),
 	    'id_kelompok_coa' => set_value('id_kelompok_coa'),
 	    'nama_coa' => set_value('nama_coa'),

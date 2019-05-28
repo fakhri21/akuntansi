@@ -423,18 +423,10 @@ function jsondaftarjurnal() {
 
 function tampilvoucher($uniqid)
 {
-    $this->db->select('a.id_voucher,
-                            concat(id_tipe_voucher,DATE_FORMAT(a.waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,
-                            a.waktu,
-                            a.id_tipe_voucher,
-                            b.id_session,
-							(b.debit-b.kredit) as price,
-                            b.keterangan
-							');
-		$this->db->from('akuntansi_h_voucher a');
-		$this->db->join('akuntansi_detail_voucher b','a.uniqid=b.uniqid_voucher','left');	
+    $this->db->select('*');
+		$this->db->from('akuntansi_voucher_jurnal a');
 		$this->db->where('a.uniqid',$uniqid);
-        $this->db->group_by('b.id_session');
+        $this->db->group_by('id_session');
         $this->db->order_by('id_detail', 'asc');
         
         
@@ -444,14 +436,11 @@ function tampilvoucher($uniqid)
 
 function tampilstock($uniqid)
 {
-    $this->db->select('b.*,
-                      concat(id_tipe_voucher,DATE_FORMAT(a.waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,
-						a.id_tipe_voucher');
-		$this->db->from('akuntansi_h_voucher a');
-		$this->db->join('laporan_stock b','a.uniqid=b.uniqid_voucher','left');	
+    $this->db->select('*');
+		$this->db->from('akuntansi_voucher_stock a');
 		//$this->db->join('akuntansi_detail_stock c','a.uniqid=c.uniqid_voucher','left');	
-		$this->db->where('a.uniqid',$uniqid);
-        //$this->db->group_by('b.id_session');
+		$this->db->where('uniqid',$uniqid);
+        $this->db->group_by('id_session');
 
         return $this->db->get()->result_array();
 		

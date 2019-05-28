@@ -27,7 +27,7 @@ class Tutup_buku extends CI_Controller
           $data['hari']=date_format(date_create($this->priode_hari),"d/m/Y");
         }
         if ($this->priode_bulan) {
-          $data['bulan']=date_format(date_create($this->priode_bulan),"m/Y");
+          $data['bulan']=date_format(date_create($this->priode_bulan),"d/m/Y");
         }
         //print_r($this->priode);
         $this->template->load($this->nama_template,'tutup_buku',$data);
@@ -35,7 +35,8 @@ class Tutup_buku extends CI_Controller
 
     public function buka_akuntansi_bulan()
     {
-      update_option('buka_akuntansi_bulan',current_time( 'mysql' ));    
+      update_option('buka_akuntansi_bulan',date('Y-m-t',strtotime(current_time( 'mysql' ))));    
+      //update_option('buka_akuntansi_bulan',current_time( 'mysql' ));    
       $this->session->set_flashdata('message_success', 'Berhasil Buka Priode Bulanan Akuntansi');
       redirect(base_url('tutup_buku'));
     }
@@ -46,7 +47,7 @@ class Tutup_buku extends CI_Controller
       $batas_bulan= date_create($this->priode_bulan);
       $hari_ini=date_create(current_time('mysql'));
 
-      if ($hari_ini>$batas_bulan) {
+      if ($hari_ini<$batas_bulan) {
         update_option('buka_akuntansi',current_time( 'mysql' ));
       }
       else {

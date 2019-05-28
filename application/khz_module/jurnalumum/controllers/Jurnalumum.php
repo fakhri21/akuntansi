@@ -44,26 +44,22 @@ class Jurnalumum extends CI_Controller {
                         'kredit'=>$_POST['nilai'],
                         'keterangan'=>$_POST['keterangan'] );
 
+        $keterangan=$_POST['keterangan']."<br>".
+                        $record['id_coa'].$_POST['nama_coa']."(D)<br>".
+                        $inversrecord['id_coa'].$_POST['invnama_coa']."C";
+
         $data = array(
             'id'      => uniqid(),
             'qty'     => 1,
             'price'   => $_POST['nilai'],
             'name'    => $_POST['keterangan'],
             'options' => array( 'item' => $record,
-                                'id_session'=>$id_session)
-        );
-        
-        $data2 = array(
-            'id'      => uniqid(),
-            'qty'     => 1,
-            'price'   => $_POST['nilai'],
-            'name'    => $_POST['keterangan'],
-            'options' => array( 'item' => $inversrecord,
-                                'id_session'=>$id_session)
+                                'invitem' => $inversrecord,
+                                'id_session'=>$id_session,
+                                'keterangan'=>$keterangan)
         );
         
         $this->cart->insert($data);
-        $this->cart->insert($data2);
 
     }
 
@@ -83,6 +79,7 @@ class Jurnalumum extends CI_Controller {
         foreach ($this->cart->contents() as $items) {
         $id_session=$items['options']['id_session'];
             $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['options']['item'],$uniqid,$id_session);
+            $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['options']['invitem'],$uniqid,$id_session);
         }
         
         $this->cart->destroy();
@@ -91,29 +88,32 @@ class Jurnalumum extends CI_Controller {
         
     }
 
-    function print_jurnalumum($uniqid)
+    function simpan_jurnalumum_api()
     {
-        $data_print = $this->Model_Jurnalumum->tampilvoucher($uniqid);
-        $data['title']='Struk';
-        $data['record']=$data_print;
-	
-        if ($data) {
-        //print_r($data_print);
-
-        require_once("dompdf/dompdf_config.inc.php");
-        $dompdf = new DOMPDF();
-
-        //Load html view
-	    $html=$this->load->view('akuntansi_voucher_detail', $data,TRUE);
-        $dompdf->load_html($html);
-	    $dompdf->set_paper('A4', 'potrait');
-	    $dompdf->render();
-	    $dompdf->stream('tes.pdf',array('Attachment' =>0));
+		$method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'POST'){
+			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+		} else {
+            $uniqid=uniqid("JU",TRUE);
+            //Header
+            $data = array('id_tipe_voucher' =>'JU' );
+            $this->Model_Jurnalumum->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
         
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(base_url('akuntansi/verifikasi_jurnal'));
-        }    
+                //Detail Pemesanan
+                $id_session=uniqid("API",TRUE);
+                
+                $params = json_decode(file_get_contents('php://input'), TRUE);
+                            
+                $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$params['debit'],$uniqid,$id_session); //Debit
+                $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$params['kredit'],$uniqid,$id_session);//Credit
+            
+                $respStatus = 200;
+				$resp = array('status' => 200,'message' =>  'Jurnal Berhasil');
+                json_output($respStatus,$resp);
+		}
+        
+        
     }
+
 
 }

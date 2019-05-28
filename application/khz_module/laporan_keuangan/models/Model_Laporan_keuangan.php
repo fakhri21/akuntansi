@@ -3,6 +3,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_Laporan_keuangan extends CI_Model {
+
+function check_laporan_keuangan($date=NULL)
+{
+    
+    
+    $this->db->select('id_coa');
+    $this->db->where('eod', $date);
+    return $this->db->get('akuntansi_laporan_keuangan')->result_array();
+    
+    
+}
+
 function trial_balance($hari)
 {
             $t_string=stripcslashes("\'Total\'");

@@ -192,7 +192,7 @@
     //Set column definition initialisation properties.
     "columns": [
     {"data": "rowid",width:170},
-    {"data": "name",width:100},
+    {"data": "options.keterangan",width:100},
     {"data": "qty",width:100},
     {"data": "options.stock.satuan",width:100},
     {"data": "price",width:100},
@@ -300,9 +300,12 @@ function current_voucher() { //voucher
     
 function tambah_item() {
         /* var type=$("#type").val() */
-        var data={'id_coa':$('#id_coa').val(),
+        var data={
+            'id_coa':$('#id_coa').val(),
+            'nama_coa':$('#id_coa').text(),
 				'nilai':numeral($('#nilai').val()).value(),
 				'id_coa_stock':$('#id_coa_stock').val(),
+				'nama_coa_stock':$('#id_coa_stock').text(),
 				'quantity':$('#quantity').val(),
 				'satuan':$('#satuan').val(),
 				'diskon':$('#diskon').val(),

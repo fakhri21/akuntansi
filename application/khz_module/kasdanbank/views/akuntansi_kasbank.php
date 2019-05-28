@@ -154,7 +154,7 @@
     //Set column definition initialisation properties.
     "columns": [
     {"data": "rowid",width:170},
-    {"data": "name",width:100},
+    {"data": "options.keterangan",width:100},
     {"data": "price",width:100},
     {"data": "rowid",width:100}
     
@@ -244,10 +244,14 @@ function current_voucher() { //voucher
 
 function tambah_kasbank() {
     var type=$("#type:checked").val()
-    var data={'id_coa':$('#id_coa').val(),
+    var data={
+    'id_coa':$('#id_coa').val(),
+    'nama_coa':$('#id_coa').text(),
     'nilai':numeral($('#nilai').val()).value(),
     'invid_coa':$('#invid_coa').val(),
-    'keterangan':$('#keterangan').val()}
+    'invnama_coa':$('#invid_coa').text(),
+    'keterangan':$('#keterangan').val()
+    }
 
     $.post('<?php echo base_url("kasdanbank/tambahkasbank/"); ?>'+type+'',data,function (response) {
         alertify.success("Berhasil Menambahkan");

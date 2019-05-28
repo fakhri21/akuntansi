@@ -18,7 +18,19 @@ class Laporan_keuangan extends CI_Controller {
             } */
          
     }
-            
+
+public function check_laporan_keuangan($date)
+{
+    $check=$this->Model_Laporan_keuangan->check_laporan_keuangan($date);
+
+    if (!$check) {
+        $this->session->set_flashdata('message_failed', 'Data Tidak Ditemukan');
+        redirect(base_url('laporan_keuangan'),'refresh');
+    }
+    
+}
+
+
 /* Laporan Keuangan */
     public function index()
     {
@@ -36,6 +48,7 @@ class Laporan_keuangan extends CI_Controller {
         }
         // echo "<pre>";
 
+        $this->check_laporan_keuangan($hari);
 
         if ($bentuk=='neraca') {
    
@@ -50,10 +63,6 @@ class Laporan_keuangan extends CI_Controller {
             $data['isi']=$this->tampil_laba_rugi($hari,$model);
         }
         
-             if (!$data['isi']) {
-                $this->session->set_flashdata('message_failed', 'Data Tidak Ditemukan');
-                redirect(base_url('laporan_keuangan'),'refresh');
-            }
  
             $data['hari']=$_POST['hari'];
             
@@ -137,28 +146,7 @@ class Laporan_keuangan extends CI_Controller {
             $record['biaya_pajak']=$this->Model_Laporan_keuangan->labarugi($hari,'8010000');
          }
          
-                        $pendapatan=0;
-                        $pendapatan_sebelumnya=0;
-                        
-                        $biaya_adm=0;
-                        $biaya_adm_sebelumnya=0;
-                        
-                        $hpp=0;
-                        $hpp_sebelumnya=0;
-                        
-                        $biaya_penyusutan=0;
-                        $biaya_penyusutan_sebelumnya=0;
-                        
-                        $biaya_pajak=0;
-                        $biaya_pajak_sebelumnya=0;
-
-                        $laba_penjualan=0;
-                        $laba_penjualan_sebelumnya=0;
             
-                        $laba_operasional=0;
-                        $laba_operasional_sebelumnya=0;
-                        $laba_sebelum_pajak=0;
-                        $laba_sebelum_pajak_sebelumnya=0;
         $isi_html='';
         $isi_html.='    			   ';
                             if ($record['pendapatan']) {
@@ -166,6 +154,9 @@ class Laporan_keuangan extends CI_Controller {
                            <tr>
                                 <td id="kategori" class="bg-light-blue text-center" colspan="4"><b>'.$record['pendapatan'][0]['nama_kategori'].'</b> </td>
                            </tr>';
+                            
+                            $pendapatan=0;
+                            $pendapatan_sebelumnya=0;
                             foreach ($record['pendapatan'] as $data) {
         $isi_html.='                     
                             <tr>
@@ -184,6 +175,8 @@ class Laporan_keuangan extends CI_Controller {
                                 <td id="kategori" class="bg-light-blue text-center" colspan="4"><b>'.$record['hpp'][0]['nama_kategori'].'</b> </td>
                             </tr>';
                             
+                            $hpp=0;
+                            $hpp_sebelumnya=0;
                             foreach ($record['hpp'] as $data) {
         $isi_html.='
                             <tr>
@@ -196,6 +189,8 @@ class Laporan_keuangan extends CI_Controller {
                             $hpp=$data['total_saldo']; 
                             $hpp_sebelumnya=$data['total_saldo_sebelumnya']; }
                             }
+            $laba_penjualan=0;
+            $laba_penjualan_sebelumnya=0;
         $isi_html.='                            
                                     <tr>
                                     <th width="280px">Total Laba Kotor</th>
@@ -210,6 +205,9 @@ class Laporan_keuangan extends CI_Controller {
                             <tr>
                                 <td id="kategori" class="bg-light-blue text-center" colspan="4"><b>'.$record['biaya_adm'][0]['nama_kategori'].'</b> </td>
                             </tr>';
+
+                            $biaya_adm=0;
+                            $biaya_adm_sebelumnya=0;
                             foreach ($record['biaya_adm'] as $data) { 
         $isi_html.='
                             <tr>
@@ -219,6 +217,9 @@ class Laporan_keuangan extends CI_Controller {
                                 <td width="100px" id="b_akun">Rp.'.number_format(abs($data['total_saldo_berjalan'])).' </td>
                             </tr>';
                             $biaya_adm=$data['total_saldo']; $biaya_adm_sebelumnya=$data['total_saldo_sebelumnya']; } }
+            $laba_operasional=0;
+            $laba_operasional_sebelumnya=0;
+
         $isi_html.='
                                 <tr>
                                 <th width="280px">Total Laba Operasional</th>
@@ -232,6 +233,9 @@ class Laporan_keuangan extends CI_Controller {
                             <tr>
                                 <td id="kategori" class="bg-light-blue text-center" colspan="4"><b>'.$record['biaya_penyusutan'][0]['nama_kategori'].'</b> </td>
                             </tr>';
+                            
+                            $biaya_penyusutan=0;
+                            $biaya_penyusutan_sebelumnya=0;
                             foreach ($record['biaya_penyusutan'] as $data) { 
 
         $isi_html.='
@@ -243,6 +247,9 @@ class Laporan_keuangan extends CI_Controller {
                             </tr>';
                             
                             $biaya_penyusutan=$data['total_saldo'];  $biaya_penyusutan_sebelumnya=$data['total_saldo_sebelumnya'];} }
+        
+            $laba_sebelum_pajak=0;
+            $laba_sebelum_pajak_sebelumnya=0;
         $isi_html.='                    
                             <tr>
                             <th width="280px">Total Laba Sebelum Pajak</th>
@@ -257,6 +264,8 @@ class Laporan_keuangan extends CI_Controller {
                             <tr>
                                 <td id="kategori" class="bg-light-blue text-center" colspan="4"><b>'.$record['biaya_pajak'][0]['nama_kategori'].'</b> </td>
                             </tr>';
+                            $biaya_pajak=0;
+                            $biaya_pajak_sebelumnya=0;
                             foreach ($record['biaya_pajak'] as $data) { 
 
         $isi_html.='

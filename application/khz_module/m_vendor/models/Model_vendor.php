@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Model_vendor extends CI_Model
 {
 
-    public $table = 'm_vendor';
+    public $table = 'akuntansi_m_vendor';
     public $id = 'uniqid';
     public $order = 'DESC';
 
@@ -18,7 +18,7 @@ class Model_vendor extends CI_Model
     // datatables
     function json() {
         $this->datatables->select('uniqid,id_vendor,name,email,alamat,no_telp,whatsapp');
-        $this->datatables->from('m_vendor');
+        $this->datatables->from('akuntansi_m_vendor');
         //add this line for join
         //$this->datatables->join('table2', 'm_vendor.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('m_vendor/read/$1'),'Read')." | ".anchor(site_url('m_vendor/update/$1'),'Update')." | ".anchor(site_url('m_vendor/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'uniqid');

@@ -55,17 +55,22 @@ class Kasdanbank extends CI_Controller {
                         'keterangan'=>$_POST['keterangan'] );
 
         }
-        
+        $keterangan=$_POST['keterangan']."<br>".
+                        $record['id_coa'].$_POST['nama_coa']."<br>".
+                        $inversrecord['id_coa'].$_POST['invnama_coa'];
+
         $data = array(
             'id'      => uniqid(),
             'qty'     => 1,
             'price'   => $_POST['nilai'],
             'name'    => $_POST['keterangan'],
             'options' => array( 'record' => $record, 
-                                'inversrecord' => $inversrecord)
+                                'inversrecord' => $inversrecord,
+                                'keterangan'=>$keterangan)
         );
         
         $this->cart->insert($data);
+        echo $name;
     }
     function simpan_kasbank()
     {

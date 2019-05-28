@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Model_satuan extends CI_Model
 {
 
-    public $table = 'm_satuan';
+    public $table = 'akuntansi_m_satuan';
     public $id = 'id_satuan';
     public $order = 'DESC';
 
@@ -18,7 +18,7 @@ class Model_satuan extends CI_Model
     // datatables
     function json() {
         $this->datatables->select('id_satuan,nama_satuan,keterangan');
-        $this->datatables->from('m_satuan');
+        $this->datatables->from('akuntansi_m_satuan');
         //add this line for join
         //$this->datatables->join('table2', 'm_satuan.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('m_satuan/read/$1'),'Read')." | ".anchor(site_url('m_satuan/update/$1'),'Update')." | ".anchor(site_url('m_satuan/delete/$1'),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_satuan');

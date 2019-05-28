@@ -36,7 +36,7 @@ class Model_coa extends CI_Model
             LEFT JOIN
                 akuntansi_m_coa
             ON
-                akuntansi_m_kelompok_coa.uniqid = m_coa.id_kelompok_coa');
+                akuntansi_m_kelompok_coa.uniqid = akuntansi_m_coa.id_kelompok_coa');
 
         $tabel = $data->result_array();
         $result = [];
@@ -117,6 +117,7 @@ class Model_coa extends CI_Model
            
             $data = array(
                 'id_kelompok_coa' => $_POST['kelompok'],
+                'uniqid'=>uniqid("COA",TRUE),
                 'id_coa'=> $_POST['idCoa'],
                 'nama_coa' => $_POST['nama_coa'],
                 'saldo_awal' => $_POST['saldo_awal'],

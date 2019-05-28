@@ -56,6 +56,11 @@ class Stock extends CI_Controller {
                         'debit'=>$total_bersih,
                         'keterangan'=>$_POST['keterangan'] );
 
+            $keterangan=$_POST['keterangan']."<br>".
+                        $inversrecord['id_coa'].$_POST['nama_coa_stock']."(Stock) <br>".
+                        $record['id_coa'].$_POST['nama_coa']."(Payment)<br>";
+
+
         $data = array(
             'id'      => uniqid(),
             'qty'     => $_POST['quantity'],
@@ -65,7 +70,9 @@ class Stock extends CI_Controller {
                                 'pajak'=>$_POST['pajak']."%",
                                 'stock' => $stock,
                                 'record'=>$record,
-                                'inversrecord'=>$inversrecord)
+                                'inversrecord'=>$inversrecord,
+                                'keterangan'=>$keterangan
+                                )
         );
         
         $this->cart->insert($data);

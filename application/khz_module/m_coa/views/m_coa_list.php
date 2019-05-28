@@ -244,6 +244,7 @@
                     if(newCoa.length == 0){
                         var jqxhr = $.post( "<?php echo base_url().'m_coa/add_coa/';?>", {   kelompok: kelompok, idCoa: data.idCoa, nama_coa: data.namaCoa, saldo_awal: data.saldoAwal, saldo_normal_special: data.saldoNormal, quantity: data.quantity })
                         .done(function(res) {
+                            $('#modal').modal('toggle');
                             console.log(res);
                             uniqid= 0;
                             
