@@ -149,21 +149,21 @@
                                 <td><?php echo ++$no ?></td>
                                 <td style="width: 50%;"><?php echo $data['nama_stock'] ?></td>
 
-                                <td class="text-right"><?php echo 'Rp.' . number_format($data['saldo_quantity_awal']) ?></td> <!-- Barang awal -->
+                                <td class="text-right"><?php echo  number_format($data['saldo_quantity_awal']) ?></td> <!-- Barang awal -->
                                 <td class="text-right"><?php echo 'Rp.' . number_format($data['saldo_price_awal']); ?> </td>
                                 <td class="text-right"><?php echo 'Rp.' . number_format($data['saldo_nilai_awal']); ?> </td>
 
-                                <td class="text-right"><?php echo 'Rp.' . number_format($data['debit_stock']) ?></td> <!-- Barang masuk -->
+                                <td class="text-right"><?php echo  number_format($data['debit_stock']) ?></td> <!-- Barang masuk -->
                                 <td class="text-right"><?php echo 'Rp.' . number_format($data['price_debit']); ?></td>
                                 <td class="text-right"><?php echo 'Rp.' . number_format($data['total_debit']);?></td>
 
                                 <?php if ($data['kredit_stock']) { ?>    
-                                <td class="text-right"><?php echo 'Rp.' . number_format($data['saldo_quantity_akhir']) ?></td>
+                                <td class="text-right"><?php echo  number_format($data['saldo_quantity_akhir']) ?></td>
                                 <td class="text-right"><?php echo 'Rp.' . number_format($data['rata_nilai_stock']) ?></td> <!-- Barang Akhir -->
                                 <td class="text-right"><?php echo 'Rp.' . number_format($data['total_nilai_stock']) ?></td>  
                                 <?php } else { ?>
 
-                                <td class="text-right"><?php echo 'Rp.' . number_format(0,2) ?></td>
+                                <td class="text-right"><?php echo number_format(0,2) ?></td>
                                 <td class="text-right"><?php echo 'Rp.' . number_format(0,2) ?></td> <!-- Barang Akhir -->
                                 <td class="text-right"><?php echo 'Rp.' . number_format(0,2) ?></td>      
 

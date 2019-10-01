@@ -42,23 +42,18 @@ public function check_laporan_keuangan($date)
         $hari=NULL;
         $model=NULL;
         
+        if ($_POST) {
                $hari= stripslashes("\'".get_gmt_from_date($_POST['hari'])."\'");
                $model=$_POST['model'];
+        }
         // echo "<pre>";
 
         $this->check_laporan_keuangan($hari);
 
         if ($bentuk=='neraca') {
+   
             $data['isi']=$this->tampil_neraca($hari,$model);
-            $neraca=[];
-            $index=[0,0,0];
 
-            $kategori['aktiva']=array_column($data['isi'],'aktiva');
-            $data_return=$kategori;
-            //array_push($data_return,$data['isi']);
-            header('Content-Type: application/json');
-            echo json_encode($data_return);
-                                
         }
         elseif ($bentuk=='trial_balance') {
             $data['isi']=$this->tampil_trial_balance($hari);
@@ -68,8 +63,18 @@ public function check_laporan_keuangan($date)
             $data['isi']=$this->tampil_laba_rugi($hari,$model);
         }
         
-        
-     }
+ 
+            $data['hari']=$_POST['hari'];
+            
+            require_once("dompdf/dompdf_config.inc.php");
+            $dompdf = new DOMPDF();
+            //Load html view
+            $html=$this->load->view('akuntansi_'.$bentuk.'',$data,TRUE);
+            $dompdf->load_html($html);
+            $dompdf->set_paper('A4', 'potrait');
+            $dompdf->render();
+            $dompdf->stream('tes.pdf',array('Attachment' =>0));
+    }
 
     public function tampil_trial_balance($hari)
     {

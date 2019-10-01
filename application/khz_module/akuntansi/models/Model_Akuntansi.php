@@ -6,22 +6,49 @@ class Model_Akuntansi extends CI_Model {
 
 //list coa
 function list_coa($kondisi)
-{
-    
+{ 
     $this->db->select('a.*');
-    $this->db->from('akuntansi_m_coa a');
-    $this->db->join('akuntansi_m_kelompok_coa b', 'a.id_kelompok_coa = b.uniqid', 'left');
+    $this->db->from('akuntansi_coa a');
+    
     switch ($kondisi) {
         case 'kb':
-            $this->db->where('b.id_kelompok_coa=1011000 or b.id_kelompok_coa=1012000 ');
+            $this->db->where('id_kelompok_coa=1011000 or id_kelompok_coa=1012000 ');
             break;
         
         case 'invkb':
-            $this->db->where('b.id_kelompok_coa<>1011000 and b.id_kelompok_coa<>1012000 ');
+            $this->db->where('id_kelompok_coa<>1011000 and id_kelompok_coa<>1012000 ');
+            break;
+        
+        case 'piutang':
+            $this->db->where('left(id_kelompok_coa,4)=1013');
             break;
         
         case 'stock':
-            $this->db->where('b.id_kelompok_coa=1014000 ');
+            $this->db->where('id_kelompok_coa=1014000');
+            break;
+            
+        case 'sewa':
+            $this->db->where('left(id_kelompok_coa,4)=1015');
+            break;
+            
+        case 'akt_tetap':
+            $this->db->where('left(id_kelompok_coa,3)=102');
+            break;
+                
+        case 'kewajiban':
+            $this->db->where('left(id_kelompok_coa,3)=201 or left(id_kelompok_coa,4)=202');
+            break;
+            
+        case 'modal':
+            $this->db->where('left(id_kelompok_coa,4)=3010 or left(id_kelompok_coa,4)=3011');
+            break;
+            
+        case 'pengeluaran':
+            $this->db->where('left(id_kelompok_coa,3)=601 or left(id_kelompok_coa,3)=800');
+            break;
+
+        case 'pendapatan':
+            $this->db->where('left(id_kelompok_coa,3)=401');
             break;
         
         default:
@@ -29,8 +56,7 @@ function list_coa($kondisi)
             break;
     }
     
-    $this->db->order_by('id_coa', 'asc');
-    
+    $this->db->order_by('id_coa', 'asc');   
     return $this->db->get()->result_array();
 }
 

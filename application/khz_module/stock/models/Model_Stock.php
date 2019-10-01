@@ -4,6 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_Stock extends CI_Model {
 
+function cek_stock($id_coa) //Average method
+{
+    
+    $this->db->select(' id_coa_stock,
+                        nama_stock,
+                        debit_stock,
+                        kredit_stock,
+                        (quantity_awal+sum(v_stock)) as quantity_akhir,
+                        (total_nilai_stock_awal+sum(total_nilai_stock)) as nilai_akhir');
+    $this->db->from('akuntansi_laporan_stock');
+    $this->db->group_by('id_coa_stock');
+    $this->db->where('id_coa_stock', $id_coa);
+    return $this->db->get()->row_array();
+    
+}
+
 //Laporan Stock
 function substock($hari,$hari_akhir,$coa)
 {
@@ -33,8 +49,8 @@ function substock($hari,$hari_akhir,$coa)
         $hari=stripslashes("\'".$hari."\'");
         $hari_akhir=stripslashes("\'".$hari_akhir."\'");
         $this->db->where('date(eod) between '.$hari.' and '.$hari_akhir.'' );
-        $this->db->from('laporan_stock,
-                        (select SUM(debit_stock-kredit_stock) as saldo_awal_quantity,SUM(total_nilai_stock) as saldo_awal_total from laporan_stock  where eod < '.$hari.' and id_coa_stock='.$coa.' ) as x, 
+        $this->db->from('akuntansi_laporan_stock,
+                        (select SUM(debit_stock-kredit_stock) as saldo_awal_quantity,SUM(total_nilai_stock) as saldo_awal_total from akuntansi_laporan_stock  where eod < '.$hari.' and id_coa_stock='.$coa.' ) as x, 
                         (select @s_a:=0,@s_n:=0)as q,
                         (select @s_q:=0) as q1,
                         (select @saldo_q_akhir:=0) as q2,
@@ -42,8 +58,8 @@ function substock($hari,$hari_akhir,$coa)
                         (select @saldo_n_akhir:=0) as q4');
     } else {
         $this->db->where('eod',0);
-        $this->db->from('laporan_stock,
-                        (select SUM(debit_stock-kredit_stock) as saldo_awal_quantity,SUM(total_nilai_stock) as saldo_awal_total from laporan_stock  where eod < curdate() and eod > 0 and id_coa_stock='.$coa.' ) as x, 
+        $this->db->from('akuntansi_laporan_stock,
+                        (select SUM(debit_stock-kredit_stock) as saldo_awal_quantity,SUM(total_nilai_stock) as saldo_awal_total from akuntansi_laporan_stock  where eod < curdate() and eod > 0 and id_coa_stock='.$coa.' ) as x, 
                         (select @s_a:=0,@s_n:=0)as q,
                         (select @s_q:=0) as q1,
                         (select @saldo_q_akhir:=0) as q2,
@@ -86,7 +102,7 @@ function laporan_stockopname($hari,$hari_akhir)
         $hari=stripslashes("\'".$hari."\'");
         $hari_akhir=stripslashes("\'".$hari_akhir."\'");
         $this->db->where('date(eod) between '.$hari.' and '.$hari_akhir.'' );
-        $this->db->from('   laporan_stock,
+        $this->db->from('   akuntansi_laporan_stock,
                             (select @s_q:=0)as q,
                             (select @s_a:=0)as q1,
                             (select @s_n:=0)as q2,
@@ -96,8 +112,8 @@ function laporan_stockopname($hari,$hari_akhir)
                             (select @saldo_p_akhir:=0) as qs3,
                             (select @saldo_n_akhir:=0) as qs4');
         $this->db->join('(select id_coa_stock as id, IFNULL(SUM(debit_stock-kredit_stock),0) as saldo_awal_quantity,IFNULL(SUM(total_nilai_stock),0) as saldo_awal_total 
-                        from laporan_stock  where eod < '.$hari.' group by id_coa_stock ) as x',
-                        'laporan_stock.id_coa_stock = x.id', 'left');
+                        from akuntansi_laporan_stock  where eod < '.$hari.' group by id_coa_stock ) as x',
+                        'akuntansi_laporan_stock.id_coa_stock = x.id', 'left');
         
     } 
     else {
@@ -180,7 +196,7 @@ function stockopname($table,$table_stock,$data,$uniqid)
     $record=$data['record'];
     $inversrecord=$data['inversrecord'];
 
-    $data_harga=$this->substock(0,0,$record['id_coa']);
+    /* $data_harga=$this->substock(0,0,$record['id_coa']);
     $data_harga=$data_harga[count($data_harga)-1];
     
     $current_stock=$data_harga['saldo_quantity_stock'];
@@ -192,7 +208,7 @@ function stockopname($table,$table_stock,$data,$uniqid)
         $inversrecord['debit']  =   $grand_total;
         $stock['harga_beli']    =   $harga_sementara;
         $stock['total_nilai_stock']    =$grand_total;
-
+ */
     $this->detail_stock($table_stock,$stock,$uniqid);
     $this->detail_voucher($table,$record,$uniqid,$id_session);
     $this->detail_voucher($table,$inversrecord,$uniqid,$id_session);
@@ -206,7 +222,7 @@ function tampilstock($uniqid)
                       concat(id_tipe_voucher,DATE_FORMAT(a.waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,
 						a.id_tipe_voucher');
 		$this->db->from('akuntansi_h_voucher a');
-		$this->db->join('laporan_stock b','a.uniqid=b.uniqid_voucher','left');	
+		$this->db->join('akuntansi_laporan_stock b','a.uniqid=b.uniqid_voucher','left');	
 		//$this->db->join('akuntansi_detail_stock c','a.uniqid=c.uniqid_voucher','left');	
 		$this->db->where('a.uniqid',$uniqid);
         //$this->db->group_by('b.id_session');

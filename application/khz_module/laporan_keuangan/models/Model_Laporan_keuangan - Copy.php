@@ -125,12 +125,14 @@ function neraca_kelompok($hari,$bagian='=1')
     $total_saldo_berjalan='@s_awal+(sum(if(month(eod)=month('.$hari.'),saldo,0))) as total_saldo_berjalan';
 
     $t_string=stripcslashes("\'<b>&nbsp; &nbsp;Total \</b> '");
-            $this->db->select('id_nama_coa, 
+            $this->db->select('ifnull(id_nama_kelompok_coa,concat('.$t_string.',nama_kategori)) as id_nama_coa, 
                             left(id_kategori,1) as jenis,
-                            nama_kategori,
+                            if(nama_kategori=@kat,NULL,nama_kategori) as nama_kategori,
+                            (@kat:=nama_kategori),
                             '.$total_saldo_sebelumnya.',
                             '.$total_saldo.', 
                             '.$total_saldo_berjalan.', 
+                            (@s:=id_coa) 
                             ',FALSE);
             $this->db->from('   akuntansi_neraca,
                                 (select @s:=0,@kat:=0) as v_saldo,
@@ -140,6 +142,7 @@ function neraca_kelompok($hari,$bagian='=1')
                 $this->db->where('(Year(eod) = Year('.$hari.') or (eod is null and saldo_awal<>0))');
             }
             
+            $this->db->group_by('nama_kategori asc,id_nama_kelompok_coa asc with rollup',FALSE);
             return $detail=$this->db->get()->result_array();
         
     

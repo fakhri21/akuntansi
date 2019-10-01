@@ -12,7 +12,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label>Item Stock</label>
-                        <select id="id_coa_stock" oninput= placeholder="Stock" ></select>
+                        <select id="id_coa_stock" oninput= placeholder="Stock" ></select> <button type="button" onclick="cek_coa()" class="btn btn-2 info">Check</button>
                     </div>
                 </div>
 
@@ -20,6 +20,27 @@
                     <div class="form-group">
                         <label>Saldo Quantity Akhir</label>
                         <input type="number" id="quantity" oninput= placeholder="" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>Current Quantity</label>
+                        <span id="current_quantity">0000</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>Current Value</label>
+                        <span id="current_value">0000</span>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <label>Current Price</label>
+                        <span id="current_price">0000</span>
                     </div>
                 </div>
                 
@@ -175,14 +196,31 @@ $.getJSON(base_url+"akuntansi/list_voucher/ST",function (data) {
 </script>
 
 <script>
-    
+/* content */
+
+function cek_coa() {
+    var data={	'id_coa_stock':$('#id_coa_stock').val(),
+			}
+
+	$.post(base_url+'stock/cek_stock/',data,function (hasil) {
+        $("#current_quantity").text(hasil.quantity_akhir)
+        $("#current_value").text(hasil.nilai_akhir)
+        $("#current_price").text(hasil.current_price)
+	})
+}
+
+/* Aksi */    
 function tambah_item() {
         /* var type=$("#type").val() */
         var data={'id_coa_hpp':$('#id_coa_hpp').val(),
 				'nilai':$('#nilai').val(),
 				'id_coa_stock':$('#id_coa_stock').val(),
 				'quantity':$('#quantity').val(),
-				'keterangan':$('#keterangan').val()}
+				'keterangan':$('#keterangan').val(),
+                'current_quantity':$('#current_quantity').text(),
+                'current_value':$('#current_value').text(),
+                'current_price':$('#current_price').text()
+                }
 
 	$.post(base_url+'stock/tambahitemopname/',data,function (response) {
         alert("Berahasil Menambahkan");

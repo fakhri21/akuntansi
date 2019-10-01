@@ -24,6 +24,17 @@ class Stock extends CI_Controller {
     {
         $this->template->load('template_admin','akuntansi_panel_stock');
     }
+
+    function cek_stock()
+    {
+       $id_coa=$this->input->post('id_coa_stock');
+       $data= $this->Model_Stock->cek_stock($id_coa);
+       $data['current_price'] =$data['nilai_akhir']/$data['quantity_akhir'];
+        
+        header('Content-Type: application/json');
+        echo json_encode($data);
+    }
+    
     function masuk_stock()
     {
         $this->cart->destroy();
@@ -103,27 +114,28 @@ class Stock extends CI_Controller {
         $this->cart->destroy();
         $this->template->load('template_admin','akuntansi_stockopname');
     }
+  
     function tambahitemopname()
     {
-            
-            $stock=array('saldo_quantity_akhir'=>$_POST['quantity'],
+            $kredit_stock=$_POST['current_quantity']-$_POST['quantity'];
+            $total_bersih=$kredit_stock*$_POST['current_price'];
+
+            $stock=array(
+                        'saldo_quantity_akhir'=>$_POST['quantity'],
                         'id_coa_stock' =>$_POST['id_coa_stock'] ,
-                        //'harga_beli'=>$harga_kotor,
-                        //'persen_potongan'=>$_POST['diskon'],
-                        //'nilai_potongan'=>$potongan,
-                        //'persen_pajak'=>$_POST['pajak'],
-                        //'nilai_pajak'=>$nilai_pajak,
-                        //'total_nilai_stock'=>$total_bersih,
-                        //'satuan'=>$_POST['satuan'],
+                        'kredit_stock' =>$kredit_stock ,
+                        'total_nilai_stock'=>$total_bersih,
                         'keterangan'=>$_POST['keterangan'],
                         'id_jenis_pembayaran' =>$_POST['id_coa_hpp'],
-                        //'id_vendor'=>$_POST['vendor'] 
                          );
-            
+                         
             $record=array('id_coa' =>$_POST['id_coa_stock'] ,
+                        'kredit'=>$total_bersih,
                         'keterangan'=>$_POST['keterangan'] );
             $inversrecord=array('id_coa' =>$_POST['id_coa_hpp'] ,
-                        'keterangan'=>$_POST['keterangan'] ); 
+                        'debit'=>$total_bersih,
+                        'keterangan'=>$_POST['keterangan'] );
+
 
         $data = array(
             'id'      => uniqid(),
@@ -141,6 +153,7 @@ class Stock extends CI_Controller {
         $this->cart->insert($data);
         
     }
+    
     function simpan_stockopname()
     {
         $uniqid=uniqid("SO",TRUE);
@@ -156,6 +169,7 @@ class Stock extends CI_Controller {
         }
         $this->cart->destroy();
     }
+    
     function print_stock($uniqid)
     {
         $data_print = $this->Model_Stock->tampilstock($uniqid);
@@ -205,15 +219,21 @@ class Stock extends CI_Controller {
         }
             $coa_stock= $_POST['coa'];
 
-        if ($stockopname==1) {
-            $data['record']=$this->Model_Stock->laporan_stockopname($hari,$hari_akhir);
-            $html=$this->load->view('akuntansi_stock_sub_opname',$data,TRUE);
+        try {
+        
+            if ($stockopname==1) {
+                $data['record']=$this->Model_Stock->laporan_stockopname($hari,$hari_akhir);
+                $html=$this->load->view('akuntansi_stock_sub_opname',$data,TRUE);
+            }
+            else {
+                $data['record']=$this->Model_Stock->substock($hari,$hari_akhir,$coa_stock);
+                $html=$this->load->view('akuntansi_stock_sub',$data,TRUE);
+            }
         }
-        else {
-            $data['record']=$this->Model_Stock->substock($hari,$hari_akhir,$coa_stock);
-            $html=$this->load->view('akuntansi_stock_sub',$data,TRUE);
+        catch (Exception $e){
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(base_url('stock/laporan_stock'));
         }
-
         //print_r($data['record']);
           require_once("dompdf/dompdf_config.inc.php");
          $dompdf = new DOMPDF();

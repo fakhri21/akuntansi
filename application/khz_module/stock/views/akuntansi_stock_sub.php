@@ -201,15 +201,15 @@
                         <td><?php echo $data['keterangan'] ?></td>
                         <td width="10%"><?php echo $data['waktu'] ?></td>
                         
-                        <td class="text-right"><?php echo 'Rp.' . number_format($data['debit_stock'],2) ?></td> <!-- Barang masuk -->
+                        <td class="text-right"><?php echo  number_format($data['debit_stock'],2) ?></td> <!-- Barang masuk -->
                         <td class="text-right"><?php echo 'Rp.' . number_format($data['harga_beli_debit'],2); ?></td>
                         <td class="text-right"><?php echo 'Rp.' . number_format($data['total_nilai_debit'],2);?> </td>
                         
-                        <td class="text-right"><?php echo 'Rp.' . number_format($data['kredit_stock'],2) ?></td> <!-- Barang Keluar -->
+                        <td class="text-right"><?php echo  number_format($data['kredit_stock'],2) ?></td> <!-- Barang Keluar -->
                         <td class="text-right"><?php echo 'Rp.' . number_format($data['harga_beli_kredit'],2); ?></td>
                         <td class="text-right"><?php echo 'Rp.' . number_format($data['total_nilai_kredit'],2);?> </td>
                         
-                        <td class="text-right"><?php echo 'Rp.' . number_format($data['saldo_quantity_stock'],2) ?></td>
+                        <td class="text-right"><?php echo  number_format($data['saldo_quantity_stock'],2) ?></td>
                         <td class="text-right"><?php echo 'Rp.' . number_format($data['rata_nilai_stock'],2) ?></td> <!-- Barang Keluar -->
                         <td class="text-right"><?php echo 'Rp.' . number_format(abs($data['saldo_nilai_stock']),2) ?></td>
                         

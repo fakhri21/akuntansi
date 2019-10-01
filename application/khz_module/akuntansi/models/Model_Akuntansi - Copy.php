@@ -21,7 +21,15 @@ function list_coa($kondisi)
             break;
         
         case 'stock':
-            $this->db->where('b.id_kelompok_coa=1014000 ');
+            $this->db->where('b.id_kelompok_coa=1014000');
+            break;
+            
+        case 'pengeluaran':
+            $this->db->where('left(b.id_kelompok_coa,3)=601 or left(b.id_kelompok_coa,3)=800');
+            break;
+
+        case 'pendapatan':
+            $this->db->where('left(b.id_kelompok_coa,3)=601');
             break;
         
         default:

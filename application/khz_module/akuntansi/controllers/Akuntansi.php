@@ -35,6 +35,7 @@ class Akuntansi extends CI_Controller {
     public function list_coa($kondisi)
     {
         $daftar_coa=$this->Model_Akuntansi->list_coa($kondisi);
+        header('Content-Type: application/json');
         echo json_encode($daftar_coa);
 
     }
@@ -42,6 +43,7 @@ class Akuntansi extends CI_Controller {
     public function list_voucher($tipe)
     {
         $daftar_voucher=$this->Model_Akuntansi->list_voucher(0,$tipe);
+        header('Content-Type: application/json');
         echo json_encode($daftar_voucher);
     }
     public function cart()
