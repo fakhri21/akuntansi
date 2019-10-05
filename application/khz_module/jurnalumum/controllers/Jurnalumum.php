@@ -1,6 +1,8 @@
-    <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Jurnalumum extends CI_Controller {
+require APPPATH . '/libraries/REST_Controller.php';
+use Restserver\Libraries\REST_Controller;
+class Jurnalumum extends REST_Controller {
 
  
 
@@ -88,11 +90,11 @@ class Jurnalumum extends CI_Controller {
         
     }
 
-    function simpan_jurnalumum_api()
+    function index_post()
     {
 		$method = $_SERVER['REQUEST_METHOD'];
         if($method != 'POST'){
-			json_output(400,array('status' => 400,'message' => 'Bad request.'));
+			$this->response(array('status' => 'Bad Request', 400));
 		} else {
             $uniqid=uniqid("JU",TRUE);
             //Header
@@ -102,14 +104,10 @@ class Jurnalumum extends CI_Controller {
                 //Detail Pemesanan
                 $id_session=uniqid("API",TRUE);
                 
-                $params = json_decode(file_get_contents('php://input'), TRUE);
-                            
                 $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$params['debit'],$uniqid,$id_session); //Debit
                 $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$params['kredit'],$uniqid,$id_session);//Credit
             
-                $respStatus = 200;
-				$resp = array('status' => 200,'message' =>  'Jurnal Berhasil');
-                json_output($respStatus,$resp);
+                $this->response($params, 200);
 		}
         
         

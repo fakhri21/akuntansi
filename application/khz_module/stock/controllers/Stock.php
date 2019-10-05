@@ -1,6 +1,9 @@
-    <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Stock extends CI_Controller {
+require APPPATH . '/libraries/REST_Controller.php';
+use Restserver\Libraries\REST_Controller;
+
+class Stock extends REST_Controller {
 
  
 
@@ -108,6 +111,31 @@ class Stock extends CI_Controller {
         echo base_url('stock/print_stock/'.$uniqid.'');
         //$this->print_kasdanbank();
     }
+
+    function index_post()
+    {
+		$method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'POST'){
+			$this->response(array('status' => 'Bad Request', 400));
+		} else {
+            $uniqid=uniqid("ST",TRUE);
+            //Header
+            $data = array('id_tipe_voucher' =>'ST' );
+           $this->Model_Stock->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
+           
+           //Detail Voucher
+           foreach ($this->cart->contents() as $items) {
+               $this->Model_Stock->detail_voucher('akuntansi_detail_voucher',$items['options']['record'],$uniqid,$items['rowid']);
+               $this->Model_Stock->detail_voucher('akuntansi_detail_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
+               $this->Model_Stock->detail_stock('akuntansi_detail_stock',$items['options']['stock'],$uniqid);
+           }
+            $this->cart->destroy();
+            $this->response($params, 200);
+		}
+        
+        
+    }
+
 //Stock opname
     function stock_opname()
     {

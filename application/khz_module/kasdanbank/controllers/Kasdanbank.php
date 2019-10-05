@@ -1,6 +1,9 @@
-    <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Kasdanbank extends CI_Controller {
+require APPPATH . '/libraries/REST_Controller.php';
+use Restserver\Libraries\REST_Controller;
+
+class Kasdanbank extends REST_Controller {
 
  
 
@@ -93,4 +96,34 @@ class Kasdanbank extends CI_Controller {
         echo base_url('verifikasi_jurnal/print_voucher/'.$uniqid.'');   
         //$this->print_kasdanbank($uniqid);
     }
+
+    function index_post()
+    {
+		$method = $_SERVER['REQUEST_METHOD'];
+        if($method != 'POST'){
+			$this->response(array('status' => 'Bad Request', 400));
+		} else {
+            if (isset($_POST['uniqid'])) {
+                $uniqid=$_POST['uniqid'];
+            } else {
+                $uniqid=uniqid("KB",TRUE);
+                //Header Kas Bank
+    
+                $data = array('id_tipe_voucher' =>'KB' );
+                $this->Model_Kasdanbank->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
+            }
+            
+            //Detail Voucher Kas Bank
+            foreach ($this->cart->contents() as $items) {
+                $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['record'],$uniqid,$items['rowid']);
+                $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
+            }
+            $this->cart->destroy();
+            $this->response($params, 200);
+		}
+        
+        
+    }
+
+    
 }
