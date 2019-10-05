@@ -31,6 +31,7 @@ class Kasdanbank extends CI_Controller {
         {
         $this->cart->destroy();
         $this->template->load('template_admin','akuntansi_kasbank');
+        $this->load->view('konten/konten_kas_dan_bank');
         }
     }
     public function tambahkasbank($kondisi)

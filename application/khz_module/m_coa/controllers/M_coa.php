@@ -12,11 +12,11 @@ class M_coa extends CI_Controller
         $this->load->model('Model_coa');
         $this->load->library('form_validation');        
 	    $this->load->library('datatables');
-        $user = wp_get_current_user();
-        if ( !in_array( 'administrator', (array) $user->roles ) ) {
+        //$user = wp_get_current_user();
+        //if ( !in_array( 'administrator', (array) $user->roles ) ) {
                 
-                redirect(base_url('denied'));
-            }
+                //redirect(base_url('denied'));
+            //}
         
     }
 

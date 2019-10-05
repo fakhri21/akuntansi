@@ -8,18 +8,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Starter</title>
+    <title>Akuntansi KHz</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/selectize.default.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/lib/fontawesome/css/all.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dataTables.bootstrap.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/AdminLTE.min.css">
+    <!-- link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/AdminLTE.min.css" -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-vue.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/animate.css">
+    
     <link href="<?php echo base_url(); ?>/assets/css/bootstrap-datepicker3.css" rel="stylesheet">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
     page. However, you can choose any other skin. Make sure you
@@ -47,12 +50,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="<?php echo base_url();?>assets/js/numeral.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap-datepicker.js"></script>
     <script src="<?php echo base_url();?>assets/js/selectize.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/js/vue.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/js/vue-router.js" type="text/javascript"></script>
 
-    <div class="container">
-      <div class="row">
-        <?php echo $contents; ?>
-      </div>
-    </div>
+    <?php echo $contents; ?>
+
 
     <script>
     var base_url="<?php echo base_url(); ?>"
@@ -71,6 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="<?php echo base_url(); ?>assets/js/app.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/alertify.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/bootstrap-vue.js"></script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
     Both of these plugins are recommended to enhance the
     user experience. Slimscroll is required when using the
