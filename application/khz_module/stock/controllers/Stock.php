@@ -26,6 +26,7 @@ class Stock extends REST_Controller {
     function index()
     {
         $this->template->load('template_admin','akuntansi_panel_stock');
+        $this->load->view('konten/konten_stock');
     }
 
     function cek_stock()
@@ -42,6 +43,7 @@ class Stock extends REST_Controller {
     {
         $this->cart->destroy();
         $this->template->load('template_admin','akuntansi_stock');
+        $this->load->view('konten/konten_stock');
     }
     function tambahitem()
     {
@@ -141,6 +143,7 @@ class Stock extends REST_Controller {
     {
         $this->cart->destroy();
         $this->template->load('template_admin','akuntansi_stockopname');
+        $this->load->view('konten/konten_stock');
     }
   
     function tambahitemopname()
@@ -228,6 +231,7 @@ class Stock extends REST_Controller {
       
        // $data['record']=$this->Model_Stock->laporanstock($hari,$hari_akhir);
         $this->template->load('template_admin','akuntansi_laporan_stock');
+        $this->load->view('konten/konten_stock');
     }
     function stock_sub()
     {

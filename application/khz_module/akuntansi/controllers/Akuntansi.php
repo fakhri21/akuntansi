@@ -29,6 +29,7 @@ class Akuntansi extends CI_Controller {
          $user = wp_get_current_user();
          
         $this->template->load('template_admin','akuntansi_home');
+        $this->load->view('konten_akuntansi/v_akuntansi');
     }
     
 /* Umum */    

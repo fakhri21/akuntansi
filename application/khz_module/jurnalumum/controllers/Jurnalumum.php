@@ -34,6 +34,7 @@ class Jurnalumum extends REST_Controller {
         {
         $this->cart->destroy();
         $this->template->load('template_admin','akuntansi_jurnalumum');
+        $this->load->view('konten/konten_jurnalumum');
         }
     }
 
