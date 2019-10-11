@@ -1,7 +1,7 @@
 <div class="container">
     <div class="box box-primary">
         <div class="box-header">
-            <h1 class="display-4">Daftar Voucher Jurnal</h1>
+            <h1 class="display-4">Daftar Kartu Transaksi</h1>
         </div>
         <div class="box-body"> 
              <table class="table table-bordered table-striped" id="mytable">

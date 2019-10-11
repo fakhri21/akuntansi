@@ -57,41 +57,6 @@
 
 </script>
 
-<script>
-    $.getJSON("<?php echo base_url('akuntansi/list_coa/kb'); ?>",function (data) {
-        data
-        $("#id_coa").selectize({
-           valueField: 'id_coa',
-           labelField: 'nama_coa',
-           searchField: 'nama_coa',
-           options: data,
-           create: false
-       });
-    })
-
-   $.getJSON("<?php echo base_url('akuntansi/list_coa/invkb'); ?>",function (data) {    
-        $("#invid_coa").selectize({
-           valueField: 'id_coa',
-           labelField: 'nama_coa',
-           searchField: 'nama_coa',
-           options: data,
-           create: false
-       });    
-
-    })
-
-    $.getJSON("<?php echo base_url('akuntansi/list_voucher/kb'); ?>",function (data) {
-        data
-        $("#search_voucher").selectize({
-           valueField: 'uniqid',
-           labelField: 'id_voucherjurnal',
-           searchField: 'id_voucherjurnal',
-           options: data,
-           create: false
-       });
-    })
-
-</script>
 
 <script>
     var uniqid=null;

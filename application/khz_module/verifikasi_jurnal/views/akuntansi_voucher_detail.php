@@ -177,13 +177,13 @@
                     $total=0;
                     $no=0;
                     foreach ($record as $recorddata) {
-                    $total=$total+$recorddata['price'];
+                    $total=$total+$recorddata['nilai'];
                     ?>
                     
                     <tr>
                         <td><?php echo ++$no;?></td>
                         <td style="width: 50%;"><?php echo $recorddata['keterangan'];?></td>
-                        <td><?php echo number_format($recorddata['price']);?></td>
+                        <td><?php echo number_format($recorddata['nilai']);?></td>
                     </tr>
 
                     <?php }?>

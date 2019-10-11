@@ -20,7 +20,7 @@ th{
 
 <div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Waktu / Tanggal : <?php echo $record[0]['waktu'] ?></h4>
+						<h4>Waktu / Tanggal : {{waktu_voucher}}</h4>
 						<h4>ID VOUCHER : <?php echo $record[0]['id_voucherjurnal'] ?></h4>
 						<h4>TIPE VOUCHER : <?php echo $record[0]['id_tipe_voucher'] ?></h4>
 						<!-- <h4>NAMA PEMBUAT : <?php echo $record[0]['nama_coa'] ?></h4>
@@ -41,7 +41,7 @@ th{
                             $total=0;
                             $no=0;
                             foreach ($record as $recorddata) {
-                             $total=$total+$recorddata['price'];
+                             $total=$total+$recorddata['nilai'];
 							 ?>
 
                             <!-- Kategori -->
@@ -49,7 +49,7 @@ th{
                                 
 								<td id="No"><?php echo ++$no;?></th>
 								<td id="Keterangan"><?php echo $recorddata['keterangan'];?></th>
-                                <td id="Jumlah"><?php echo number_format($recorddata['price']);?></th>
+                                <td id="Jumlah"><?php echo number_format($recorddata['nilai']);?></th>
                                 
                             </tr>
                             

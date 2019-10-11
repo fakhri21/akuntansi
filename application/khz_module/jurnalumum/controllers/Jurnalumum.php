@@ -66,11 +66,11 @@ class Jurnalumum extends REST_Controller {
 
     }
 
-    function simpan_jurnalumum()
+    function simpan_jurnalumum($uniqid,$jurnal)
     {
         
-        if (isset($_POST['uniqid'])) {
-            $uniqid=$_POST['uniqid'];
+        if ($uniqid!=NULL) {
+            $uniqid=$uniqid;
         } else {
             $uniqid=uniqid("JU",TRUE);
             //Header
@@ -79,15 +79,12 @@ class Jurnalumum extends REST_Controller {
         }
         
         //Detail Pemesanan
-        foreach ($this->cart->contents() as $items) {
-        $id_session=$items['options']['id_session'];
-            $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['options']['item'],$uniqid,$id_session);
-            $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['options']['invitem'],$uniqid,$id_session);
+        foreach ($jurnal as $items) {
+        $id_session=uniqid("",TRUE);
+            $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['record'],$uniqid,$id_session);
+            $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$items['inversrecord'],$uniqid,$id_session);
         }
-        
-        $this->cart->destroy();
-
-        echo base_url('verifikasi_jurnal/print_voucher/'.$uniqid.'');   
+           
         
     }
 
@@ -97,18 +94,20 @@ class Jurnalumum extends REST_Controller {
         if($method != 'POST'){
 			$this->response(array('status' => 'Bad Request', 400));
 		} else {
-            $uniqid=uniqid("JU",TRUE);
-            //Header
-            $data = array('id_tipe_voucher' =>'JU' );
-            $this->Model_Jurnalumum->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
-        
-                //Detail Pemesanan
-                $id_session=uniqid("API",TRUE);
+            $uniqid=$_POST['uniqid'];
+            $jurnal=$_POST['data'];
+            switch ($aksi) {
+                case 'value':
+                    # code...
+                    break;
                 
-                $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$params['debit'],$uniqid,$id_session); //Debit
-                $this->Model_Jurnalumum->detail_voucher('akuntansi_detail_voucher',$params['kredit'],$uniqid,$id_session);//Credit
+                default:
+                    $this->simpan_jurnalumum($uniqid,$jurnal);
+                    break;
+            }
             
-                $this->response($params, 200);
+            $pesan="Berhasil Menyimpan";
+            $this->response($pesan, 200);
 		}
         
         

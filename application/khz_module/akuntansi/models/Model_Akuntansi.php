@@ -63,6 +63,8 @@ function list_coa($kondisi)
 function list_voucher($status,$tipe)
 {
     $this->db->select('a.id_voucher,
+                        waktu,
+                        id_tipe_voucher,
                         concat(id_tipe_voucher,DATE_FORMAT(a.waktu,"%y%m"),right(concat(prefix_number,id_voucher),4))as id_voucherjurnal,
                         uniqid');
 		$this->db->from('akuntansi_h_voucher a');
@@ -78,6 +80,20 @@ function list_voucher($status,$tipe)
         
         return $this->db->get()->result_array();
 }
+
+function detail_voucher($uniqid)
+{
+        $this->db->select('*,(debit+kredit) as nilai');
+		$this->db->from('akuntansi_kumpulan_jurnal a');
+		$this->db->where('a.uniqid_voucher',$uniqid);
+        $this->db->group_by('id_session');
+        $this->db->order_by('id_detail', 'asc');
+        
+        
+        return $this->db->get()->result_array();
+		
+}
+
 
 
 }

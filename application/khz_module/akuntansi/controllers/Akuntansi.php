@@ -47,6 +47,14 @@ class Akuntansi extends CI_Controller {
         header('Content-Type: application/json');
         echo json_encode($daftar_voucher);
     }
+    
+    public function detail_voucher($uniqid)
+    {
+        $detail_voucher=$this->Model_Akuntansi->detail_voucher($uniqid);
+        header('Content-Type: application/json');
+        echo json_encode($detail_voucher);
+    }
+
     public function cart()
     {
         $data['itemcart']=$this->cart->contents();

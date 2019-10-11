@@ -25,8 +25,8 @@
           </b-form-group>
 
           <b-form-group label="Status">
-            <b-form-radio v-model="selected" name="some-radios" value="A">Subleger Stock</b-form-radio>
-            <b-form-radio v-model="selected" name="some-radios" value="B">Stock Opname B</b-form-radio>
+            <b-form-radio v-model="selected" name="some-radios" value="A">Subledger Stock</b-form-radio>
+            <b-form-radio v-model="selected" name="some-radios" value="B">Stock Opname</b-form-radio>
           </b-form-group>
 
           <b-form-group label="COA Stock">

@@ -8,7 +8,7 @@ class Model_Akuntansi extends CI_Model {
 function list_coa($kondisi)
 {
     
-    $this->db->select('a.*');
+    $this->db->select('a.nama_coa as text,a.id_coa as value');
     $this->db->from('akuntansi_m_coa a');
     $this->db->join('akuntansi_m_kelompok_coa b', 'a.id_kelompok_coa = b.uniqid', 'left');
     switch ($kondisi) {

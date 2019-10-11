@@ -25,12 +25,13 @@ Vue.component('jurnal', {
   data: function () {
   return {
     datalink : [
-{link:"<?php echo base_url();?>kasdanbank", judul:"Kas & Bank", warna:"danger", icon:"fas fa-money-check-alt"},
-{link:"<?php echo base_url();?>jurnalumum", judul:"Jurnal Umum", warna:"info", icon:"fas fa-book-open" },
+{link:"<?php echo base_url();?>kasdanbank/front", judul:"Transaksi", warna:"danger", icon:"fas fa-money-check-alt"},
+{link:"<?php echo base_url();?>jurnalumum/front", judul:"Jurnal Umum", warna:"info", icon:"fas fa-book-open" },
 {link:"#/stock", judul:"Stock", warna:"success", icon:"fas fa-box-open"},
 {link:"<?php echo base_url();?>m_coa", judul:"Chart of Account", warna:"warning", icon:"fas fa-list-alt"},
-{link:"<?php echo base_url();?>hutang", judul:"Hutang", warna:"secondary", icon:"fas fa-comments-dollar"},
-{link:"<?php echo base_url();?>piutang", judul:"Piutang", warna:"primary", icon:"fas fa-hand-holding-usd"},
+{link:"<?php echo base_url();?>hutang", judul:"Kartu Hutang", warna:"secondary", icon:"fas fa-comments-dollar"},
+{link:"<?php echo base_url();?>piutang", judul:"Kartu Piutang", warna:"primary", icon:"fas fa-hand-holding-usd"},
+{link:"<?php echo base_url();?>verifikasi_jurnal", judul:"Kartu Transaksi", warna:"primary", icon:"fas fa-hand-holding-usd"},
 ],
 }
 },
@@ -100,9 +101,10 @@ lapumum : [
 ],
 lapkeuangan : [
 {link:"", judul:"Laporan Laba Rugi", warna:"warning", icon:"fas fa-file-invoice-dollar"},
-{link:"", judul:"Laporan Neraca", warna:"secondary", icon:"fas fa-file-medical-alt"},
+{link:"", judul:"Laporan Posisi Keuangan", warna:"secondary", icon:"fas fa-file-medical-alt"},
 {link:"", judul:"Laporan Trial Balance", warna:"success", icon:"fas fa-file-invoice"},
-{link:"", judul:"Laporan Cashflow", warna:"info", icon:"fas fa-file-contract"},
+{link:"", judul:"Laporan Arus Kas", warna:"info", icon:"fas fa-file-contract"},
+{link:"", judul:"Laporan Perubahan Modal", warna:"info", icon:"fas fa-file-invoice"},
 ],
 }
 },
@@ -255,6 +257,8 @@ datalink : [
 {link:"jurnal", judul:"Pencatatan & Jurnal", warna:"danger", icon:"fas fa-book"},
 {link:"laporan", judul:"Laporan", warna:"info", icon:"fas fa-file-alt" },
 {link:"buku", judul:"Buku", warna:"success", icon:"fas fa-book-open"},
+{link:"buku", judul:"Customer", warna:"primary", icon:"fas fa-user"},
+{link:"buku", judul:"Supplier", warna:"secondary", icon:"fas fa-user"},
 ],
 }
 },

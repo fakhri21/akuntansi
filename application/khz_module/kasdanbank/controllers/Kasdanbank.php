@@ -23,24 +23,10 @@ class Kasdanbank extends REST_Controller {
     }
             
     /* Cash and Bank */
-    public function index()
-    {
-        $status=get_option('buka_akuntansi');
-        if ($status=='') {
-            $this->session->set_flashdata('message_failed', 'Buka Akuntansi terlebih dahulu');
-            redirect('tutup_buku','refresh');
-        }
-        else
-        {
-        $this->cart->destroy();
-        $this->template->load('template_admin','akuntansi_kasbank');
-        $this->load->view('konten/konten_kas_dan_bank');
-        }
-    }
     public function tambahkasbank($kondisi)
     {
         
-        if ($kondisi==0) {
+        if ($kondisi=="pendapatan") {
             # In
             $record=array('id_coa' =>$_POST['id_coa'] ,
                         'debit'=>$_POST['nilai'],
@@ -76,10 +62,10 @@ class Kasdanbank extends REST_Controller {
         $this->cart->insert($data);
         echo $name;
     }
-    function simpan_kasbank()
+    function simpan_kasbank($uniqid,$jurnal)
     {
-        if (isset($_POST['uniqid'])) {
-            $uniqid=$_POST['uniqid'];
+        if ($uniqid!=NULL) {
+            $uniqid=$uniqid;
         } else {
             $uniqid=uniqid("KB",TRUE);
             //Header Kas Bank
@@ -89,38 +75,43 @@ class Kasdanbank extends REST_Controller {
         }
         
         //Detail Voucher Kas Bank
-        foreach ($this->cart->contents() as $items) {
-            $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['record'],$uniqid,$items['rowid']);
-            $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
+        
+        foreach ($jurnal as $items) {
+            $rowid=uniqid("",TRUE);
+            //foreach ($this->cart->contents() as $items) {
+            $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['record'],$uniqid,$rowid);
+            $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['inversrecord'],$uniqid,$rowid);
         }
-        $this->cart->destroy();
-        echo base_url('verifikasi_jurnal/print_voucher/'.$uniqid.'');   
+        //$this->cart->destroy();
+        //echo base_url('verifikasi_jurnal/print_voucher/'.$uniqid.'');   
         //$this->print_kasdanbank($uniqid);
     }
 
-    function index_post()
+    function index_get()
+    {
+        # code...
+    }
+
+    function index_post($aksi)
     {
 		$method = $_SERVER['REQUEST_METHOD'];
         if($method != 'POST'){
 			$this->response(array('status' => 'Bad Request', 400));
 		} else {
-            if (isset($_POST['uniqid'])) {
-                $uniqid=$_POST['uniqid'];
-            } else {
-                $uniqid=uniqid("KB",TRUE);
-                //Header Kas Bank
-    
-                $data = array('id_tipe_voucher' =>'KB' );
-                $this->Model_Kasdanbank->simpan_voucher('akuntansi_h_voucher',$data,$uniqid);
+            $uniqid=$_POST['uniqid'];
+            $jurnal=$_POST['data'];
+            switch ($aksi) {
+                case 'value':
+                    # code...
+                    break;
+                
+                default:
+                    $this->simpan_kasbank($uniqid,$jurnal);
+                    break;
             }
             
-            //Detail Voucher Kas Bank
-            foreach ($this->cart->contents() as $items) {
-                $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['record'],$uniqid,$items['rowid']);
-                $this->Model_Kasdanbank->detail_voucher('akuntansi_detail_voucher',$items['options']['inversrecord'],$uniqid,$items['rowid']);
-            }
-            $this->cart->destroy();
-            $this->response($params, 200);
+            $pesan="Berhasil Menyimpan";
+            $this->response($pesan, 200);
 		}
         
         
